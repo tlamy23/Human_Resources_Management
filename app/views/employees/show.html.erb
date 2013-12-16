@@ -1,0 +1,28 @@
+<center>
+<p id="notice"><%= notice %></p>
+
+<p>
+	<%= image_tag(@employee.image, :size => "200x200")%>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @employee.name %>
+</p>
+
+<p>
+  <strong>First lastname:</strong>
+  <%= @employee.first_lastname %>
+</p>
+
+<p>
+  <strong>Second lastname:</strong>
+  <%= @employee.second_lastname %>
+</p>
+<p>
+  <strong>Birthdate:</strong>
+  <%= @employee.birthdate %>
+</p>
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>
+</center>

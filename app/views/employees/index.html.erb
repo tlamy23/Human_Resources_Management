@@ -1,0 +1,36 @@
+<center>
+<h1>Listing employees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>First lastname</th>
+      <th>Second lastname</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= image_tag(employee.image, :size => "75x75")%></td>
+        <td><%= employee.name %></td>
+        <td><%= employee.first_lastname %></td>
+        <td><%= employee.second_lastname %></td>
+        <td><%= employee.calendar_type.name %></td>
+        <td><%= link_to 'Show', employee %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Employee', new_employee_path %>
+</center>

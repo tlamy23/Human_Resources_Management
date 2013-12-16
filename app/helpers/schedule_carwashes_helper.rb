@@ -1,0 +1,2 @@
+module ScheduleCarwashesHelper
+end

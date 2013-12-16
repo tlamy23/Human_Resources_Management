@@ -1,0 +1,46 @@
+<%= form_for(@employee) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% @employee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+  <%= f.label "Foto"%><br>
+  <%= image_tag(@employee.image, :size => "200x200")%>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :first_lastname %><br>
+    <%= f.text_field :first_lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :second_lastname %><br>
+    <%= f.text_field :second_lastname %>
+  </div>
+  <div class="select">
+  <%=f.label :calendar_type_id%>
+  <%= f.select :calendar_type_id,CalendarType.all.collect{|t|[t.name,t.id]}, :include_blank => true  %>
+  </div>
+  <div class="field">
+    <%= f.label :birthdate %><br>
+    <%= f.date_select :birthdate %>
+  </div>
+  <div class="file">
+    <%= f.label "Image"%><br>
+    <%= f.file_field :dataimage %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
