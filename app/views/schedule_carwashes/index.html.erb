@@ -6,6 +6,7 @@
     <tr>
       <th>Date</th>
       <th>Turn</th>
+      <th></th>
       <th>Employee</th>
       <th></th>
       <th></th>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= schedule_carwash.date %></td>
         <td><%= schedule_carwash.turn %></td>
+        <td><%= image_tag(schedule_carwash.employee.image,:size=>"50x50") %></td>
         <td><%= schedule_carwash.employee.name + ' ' + schedule_carwash.employee.first_lastname %></td>
         <td><%= link_to 'Show', schedule_carwash %></td>
         <td><%= link_to 'Edit', edit_schedule_carwash_path(schedule_carwash) %></td>
