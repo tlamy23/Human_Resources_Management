@@ -56,14 +56,11 @@
                           </p>
                         <% end %>
                         <script type="text/javascript">
-                        $('#CarWash-target-<%=@day.day.to_s%>').qtip(
+                        $('#CarWash-target-<%=@day.day.to_s%>').popover(
                           {
-                            style:{
-                              classes:'tooltip',
-                              widget: true,
-                              def: false 
-                            },
-                            content: {text:$('#CarWash-content<%=@day.day.to_s%>')}
+                            trigger: 'hover',
+                            html: true,
+                            content: $('#CarWash-content<%=@day.day.to_s%>').html()
                           });
                         </script>
                       <% end %>
@@ -83,15 +80,12 @@
                           </p>
                         <%end%>
                         <script type="text/javascript">
-                          $('#BirthDate-target-<%=@day.day.to_s%>').qtip(
-                            {
-                              style:{
-                                classes:'tooltip',
-                                widget: true,
-                                def: false 
-                              },
-                              content: {text:$('#BirthDate-content<%=@day.day.to_s%>')}
-                            });
+                        $('#BirthDate-target-<%=@day.day.to_s%>').popover(
+                          {
+                            trigger: 'hover',
+                            html: true,
+                            content: $('#BirthDate-content<%=@day.day.to_s%>').html()
+                          });
                         </script>
                       <%end%>
                     </td>
