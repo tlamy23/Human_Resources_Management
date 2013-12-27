@@ -1,43 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title >HumanResourcesManagement</title>
-  <%= javascript_include_tag "http://code.jquery.com/jquery-1.9.1.js"%>
-	<%=javascript_include_tag "jquery-rails.js"%>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body >
-
-<table width="100%">
-	<tr>
-		<td id="tdlogo">
-				<h1>
-					<%= link_to image_tag("home.ico", :size => "75x75"),'/home/index',:title=>"Home"%>
-				</h1>
-		</td>
-		<td id="tdhead">
-			<div id="dvhead">
-				<h1>
-					<center>Human Resources Management</center>
-				</h1>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div id="dvmenu">
-				<%=image_tag("down.ico", :size => "75x75")%><br>
-				<%= link_to image_tag("employees.ico", :size => "75x75"),'/employees#index',:title=>"Employees"%><br>
-				<%= link_to image_tag("today.ico", :size => "75x75"),'/day_offs#index',:title=>"Days Off"%><br>
-				<%= link_to image_tag("flag.ico", :size => "75x75"),'/calendar_types#index',:title=>"Calendar Types"%><br>
-				<%= link_to image_tag("carwash.ico", :size => "75x75"),'/schedule_carwashes#index',:title=>"Schedule CarWash"%>
-			</div>
-		<td id="tdBody">
-			<%= yield %>
-		</td>
-	</tr>
-</table>
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Human Resources Management" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Human Resources Management" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </main>
+  </body>
 </html>
