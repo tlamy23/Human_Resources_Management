@@ -1,0 +1,9 @@
+%p#notice= notice
+%p
+  = image_tag(@calendar_type.image,:size=>"25x25")
+%p
+  %strong Name:
+  = @calendar_type.name
+= link_to 'Edit', edit_calendar_type_path(@calendar_type)
+|
+\#{link_to 'Back', calendar_types_path}

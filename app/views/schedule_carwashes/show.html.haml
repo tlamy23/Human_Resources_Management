@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Date:
+  = @schedule_carwash.date
+%p
+  %strong Turn:
+  = @schedule_carwash.turn
+%p
+  %strong Employee:
+  = @schedule_carwash.employee.name+' '+ @schedule_carwash.employee.first_lastname
+= link_to 'Edit', edit_schedule_carwash_path(@schedule_carwash)
+|
+\#{link_to 'Back', schedule_carwashes_path}

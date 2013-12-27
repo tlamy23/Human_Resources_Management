@@ -1,0 +1,27 @@
+%center
+  %h1 Listing schedule_carwashes
+  %table
+    %thead
+      %tr
+        %th Date
+        %th Turn
+        %th
+        %th Employee
+        %th
+        %th
+        %th
+    %tbody
+      - @schedule_carwashes.each do |schedule_carwash|
+        %tr
+          %td= schedule_carwash.date
+          %td= schedule_carwash.turn
+          %td= image_tag(schedule_carwash.employee.image,:size=>"50x50")
+          %td= schedule_carwash.employee.name + ' ' + schedule_carwash.employee.first_lastname
+          %td= link_to 'Show', schedule_carwash
+          %td= link_to 'Edit', edit_schedule_carwash_path(schedule_carwash)
+          %td= link_to 'Destroy', schedule_carwash, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
+  = link_to 'New Schedule carwash', new_schedule_carwash_path
+  %br/
+  = link_to "Generate",{:action => "generateSchedule"}
+  %br/

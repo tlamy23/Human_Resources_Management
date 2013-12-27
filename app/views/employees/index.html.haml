@@ -1,0 +1,24 @@
+%center
+  %h1 Listing employees
+  %table
+    %thead
+      %tr
+        %th Name
+        %th First lastname
+        %th Second lastname
+        %th Type
+        %th
+        %th
+    %tbody
+      - @employees.each do |employee|
+        %tr
+          %td= image_tag(employee.image, :size => "75x75")
+          %td= employee.name
+          %td= employee.first_lastname
+          %td= employee.second_lastname
+          %td= employee.calendar_type.name
+          %td= link_to 'Show', employee
+          %td= link_to 'Edit', edit_employee_path(employee)
+          %td= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
+  = link_to 'New Employee', new_employee_path

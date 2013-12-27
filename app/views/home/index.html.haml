@@ -1,0 +1,87 @@
+- if @day==nil
+  - @day=Date.today
+- @month = @day.month
+- @day= @day - @day.day
+- @day += 1
+- @days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+%center
+  .calendar
+    %center
+      %h1.calendar
+        = link_to image_tag("back.ico", :size => "25x25"),{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month"
+        = @day.strftime("%Y/%m")
+        / FECHA ANIO/MES
+        = link_to image_tag("forward.ico", :size => "25x25"),{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month"
+  %table.calendar
+    %thead.calendar
+      %th Sun
+      %th Mon
+      %th Tur
+      %th wen
+      %th Thu
+      %th Fri
+      %th Sat
+    - while @month == @day.month
+      %tr
+        - @days.each do|d|
+          %td.calendar{:id => "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}"}
+            %div
+              - if @day.strftime("%a") == d
+                - @daysoff=DayOff.where(:date=>@day)
+                %h3
+                  = @day.day.to_s
+                  / DIA
+                  - @daysoff.each do|dayoff|
+                    = image_tag(dayoff.calendar_type.image, :size => "25x25",:title=>dayoff.name)
+                %table
+                  %tr
+                    %td{:id => "td#{@day.day.to_s}"}
+                      / CARWASH
+                      - s = ScheduleCarwash.where(:date=>@day).order(:turn)
+                      - if s.count>0
+                        = link_to image_tag("carwash.ico", :size => "25x25") ,'/schedule_carwashes#index', :id=>"CarWash-target-"+@day.day.to_s,:class=>"lnkCarWash"
+                        = content_tag :div, id: "CarWash-content"+@day.day.to_s,style: "display:none" do
+                          %p
+                            - s.each do |sc|
+                              %div
+                                = image_tag(sc.employee.image, :size => "35x35")
+                                = sc.employee.name + ' ' + sc.employee.first_lastname
+                                %br/
+                        :javascript
+                          $('#CarWash-target-#{@day.day.to_s}').popover(
+                            {
+                              trigger: 'hover',
+                              html: true,
+                              content: $('#CarWash-content#{@day.day.to_s}').html()
+                            });
+                    %td
+                      - b=Employee.where(:birthdate=>@day)
+                      / BIRTHDATE
+                      - if b.count>0
+                        = link_to image_tag('gift.ico', :size => "25x25"),'/employees#index' ,:id=>"BirthDate-target-"+@day.day.to_s
+                        = content_tag :div, id: "BirthDate-content"+@day.day.to_s,style:"display:none" do
+                          %p
+                            - b.each do |bd|
+                              %div
+                                = image_tag(bd.image, :size => "35x35")
+                                = bd.name + ' ' + bd.first_lastname
+                        :javascript
+                          $('#BirthDate-target-#{@day.day.to_s}').popover(
+                            {
+                              trigger: 'hover',
+                              html: true,
+                              content: $('#BirthDate-content#{@day.day.to_s}').html()
+                            });
+                  %tr
+                    %td
+                      - image_tag('event.ico', :size => "25x25",:title=>"Event")
+                    %td
+                      - image_tag('alarm.ico', :size => "25x25",:title=>"Meeting")
+                - @day += 1
+                - if @day.month!=@month
+                  - break
+    %tbody
+:javascript
+  $('.calendar').ready(function(){
+    $('#td#{Date.today.year.to_s+Date.today.month.to_s+Date.today.day.to_s}').css("background-color", "#FFA500");
+  });

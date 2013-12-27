@@ -34,7 +34,14 @@ end
 
 gem 'bootstrap-sass'
 
-gem 'rails_layout', github: 'RailsApps/rails_layout'
+gem "haml-rails"
+
+group :development do
+	gem 'rails_layout', github: 'RailsApps/rails_layout'
+	gem "hpricot"
+	gem "ruby_parser"
+	gem 'html2haml'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
