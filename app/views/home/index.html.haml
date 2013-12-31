@@ -46,7 +46,7 @@
                         = content_tag :div, id: "CarWash-content-"+@day.day.to_s, style: "display:none" do
                           %p
                             - s.each do |sc|
-                              %div{:class =>"alert alert-warning"}
+                              %div
                                 = image_tag(sc.employee.image, :size => "35x35")
                                 = sc.employee.name + ' ' + sc.employee.first_lastname
                                 %br/
@@ -58,7 +58,7 @@
                         = content_tag :div, id: "BirthDate-content-"+@day.day.to_s,style:"display:none" do
                           %p
                             - b.each do |bd|
-                              %div{:class =>"alert alert-warning"}
+                              %div
                                 = image_tag(bd.image, :size => "35x35")
                                 = bd.name + ' ' + bd.first_lastname
                   %tr
