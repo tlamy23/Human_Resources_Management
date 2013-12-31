@@ -4,35 +4,38 @@
 - @day= @day - @day.day
 - @day += 1
 - @days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+%input{:id => "dateToday",:type=>"text",:name=>"dateToday",:value=>Date.today.year.to_s+Date.today.month.to_s+Date.today.day.to_s,:style=> "display:none"}
+  
 %center
   .calendar
     %center
-      %h1.calendar
-        = link_to image_tag("back.ico", :size => "25x25"),{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month"
+      %h1
+        = link_to image_tag("back.ico", :size => "25x25"),{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month",:class =>"btn-default"
         = @day.strftime("%Y/%m")
         / FECHA ANIO/MES
-        = link_to image_tag("forward.ico", :size => "25x25"),{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month"
-  %table.calendar
-    %thead.calendar
+        = link_to image_tag("forward.ico", :size => "25x25"),{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month",:class =>"btn-default"
+  %table.table
+    %thead
       %th Sun
-      %th Mon
-      %th Tur
-      %th wen
-      %th Thu
-      %th Fri
+      %th.active Mon
+      %th.active Tur
+      %th.active wen
+      %th.active Thu
+      %th.active Fri
       %th Sat
     - while @month == @day.month
       %tr
         - @days.each do|d|
-          %td.calendar{:id => "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}"}
+          %td{:id => "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",:class =>"thumbnail btn-default"}
             %div
               - if @day.strftime("%a") == d
                 - @daysoff=DayOff.where(:date=>@day)
                 %h3
                   = @day.day.to_s
                   / DIA
-                  - @daysoff.each do|dayoff|
-                    = image_tag(dayoff.calendar_type.image, :size => "25x25",:title=>dayoff.name)
+                  %div
+                    - @daysoff.each do|dayoff|
+                      = image_tag(dayoff.calendar_type.image, :size => "25x25",:title=>dayoff.name)
                 %table
                   %tr
                     %td{:id => "td#{@day.day.to_s}"}
@@ -40,14 +43,13 @@
                       - s = ScheduleCarwash.where(:date=>@day).order(:turn)
                       - if s.count>0
                         = link_to image_tag("carwash.ico", :size => "25x25") ,'/schedule_carwashes#index', :id=>"CarWash-target-"+@day.day.to_s,:class=>"tt"
-                        = content_tag :div, id: "CarWash-content-"+@day.day.to_s,style: "display:none" do
+                        = content_tag :div, id: "CarWash-content-"+@day.day.to_s, style: "display:none" do
                           %p
                             - s.each do |sc|
-                              %div
+                              %div{:class =>"alert alert-warning"}
                                 = image_tag(sc.employee.image, :size => "35x35")
                                 = sc.employee.name + ' ' + sc.employee.first_lastname
                                 %br/
-                        
                     %td
                       - b=Employee.where(:birthdate=>@day)
                       / BIRTHDATE
@@ -56,7 +58,7 @@
                         = content_tag :div, id: "BirthDate-content-"+@day.day.to_s,style:"display:none" do
                           %p
                             - b.each do |bd|
-                              %div
+                              %div{:class =>"alert alert-warning"}
                                 = image_tag(bd.image, :size => "35x35")
                                 = bd.name + ' ' + bd.first_lastname
                   %tr
@@ -68,17 +70,4 @@
                 - if @day.month!=@month
                   - break
     %tbody
-:javascript
-  $('.calendar').ready(function(){
-    $('#td#{Date.today.year.to_s+Date.today.month.to_s+Date.today.day.to_s}').css("background-color", "#FFA500");
-  });
-  $(document).ready(function(){
-    $('.tt').each(function(i){
-      var strid='#'+this.id.replace('target','content');
-      $(this).popover({
-        trigger: 'hover',
-        html: true,
-        content: $(strid).html()
-      });
-    });
-  });
+  

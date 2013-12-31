@@ -1,42 +1,5 @@
+@import "bootstrap";
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-a:link {text-decoration:none;}
-a:visited {text-decoration:none;}
-a:hover {text-decoration:underline;}
-a:active {text-decoration:underline;}
-
-//calendar-->
-table.calendar{border:5px solid black;}
-thead.calendar
-{
-	background-color: #FFA500;
-}
-td.calendar
-{
-	border:1px solid black;
-	height: 125px;
-	width: 125px;
-	background-color: #F0FFFF;
-}
-h1.calendar
-{
-	margin:10px;
-}
-div.calendar
-{
-
-	background-color: #C0C0C0;
-	border:3px solid black;
-	width: 15%;
-}
-//calendar<--
-
-
-.tooltip
-{
-    background-color: #FF4500;
-    color: black;
-    border-radius:10px;
-}
 
