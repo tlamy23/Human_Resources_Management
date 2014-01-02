@@ -18,7 +18,6 @@
           %td= employee.first_lastname
           %td= employee.second_lastname
           %td= image_tag(employee.calendar_type.image,:size => "50x50")
-          /%td= link_to 'Show', employee
           %td= link_to 'Edit', edit_employee_path(employee)
           %td= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }
   %br/
