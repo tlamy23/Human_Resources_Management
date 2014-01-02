@@ -1,8 +1,9 @@
 %center
   %h1 Listing employees
-  %table
+  %table.table
     %thead
       %tr
+        %th Photo
         %th Name
         %th First lastname
         %th Second lastname
@@ -12,12 +13,12 @@
     %tbody
       - @employees.each do |employee|
         %tr
-          %td= image_tag(employee.image, :size => "75x75")
+          %td= link_to image_tag(employee.image, :size => "75x75"), employee
           %td= employee.name
           %td= employee.first_lastname
           %td= employee.second_lastname
-          %td= employee.calendar_type.name
-          %td= link_to 'Show', employee
+          %td= image_tag(employee.calendar_type.image,:size => "50x50")
+          /%td= link_to 'Show', employee
           %td= link_to 'Edit', edit_employee_path(employee)
           %td= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }
   %br/
