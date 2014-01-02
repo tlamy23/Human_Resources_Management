@@ -6,6 +6,8 @@
   %strong Turn:
   = @schedule_carwash.turn
 %p
+  = image_tag @schedule_carwash.employee.image, :size => "200x200"
+%p
   %strong Employee:
   = @schedule_carwash.employee.name+' '+ @schedule_carwash.employee.first_lastname
 = link_to 'Edit', edit_schedule_carwash_path(@schedule_carwash)
