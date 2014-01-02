@@ -1,18 +1,17 @@
 %center
-  %h1 Listing calendar_types
-  %table
+  %h1 Listing Calendar Types
+  %table.table
     %thead
       %tr
         %th Name
-        %th
+        %th Image
         %th
         %th
     %tbody
       - @calendar_types.each do |calendar_type|
         %tr
-          %td= calendar_type.name
+          %td= link_to calendar_type.name, calendar_type
           %td= image_tag(calendar_type.image, :size => "25x25")
-          %td= link_to 'Show', calendar_type
           %td= link_to 'Edit', edit_calendar_type_path(calendar_type)
           %td= link_to 'Destroy', calendar_type, method: :delete, data: { confirm: 'Are you sure?' }
   %br/
