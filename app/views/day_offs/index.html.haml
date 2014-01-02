@@ -1,6 +1,6 @@
 %center
-  %h1 Listing day_offs
-  %table
+  %h1 Listing Days Offs
+  %table.table
     %thead
       %tr
         %th Name
@@ -12,10 +12,9 @@
     %tbody
       - @day_offs.each do |day_off|
         %tr
-          %td= day_off.name
+          %td= link_to day_off.name, day_off
           %td= day_off.date
-          %td= day_off.calendar_type.name
-          %td= link_to 'Show', day_off
+          %td= image_tag day_off.calendar_type.image, :size => "75x75"
           %td= link_to 'Edit', edit_day_off_path(day_off)
           %td= link_to 'Destroy', day_off, method: :delete, data: { confirm: 'Are you sure?' }
   %br/

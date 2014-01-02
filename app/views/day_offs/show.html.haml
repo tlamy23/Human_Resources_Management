@@ -5,6 +5,8 @@
 %p
   %strong Date:
   = @day_off.date
+%p
+  = image_tag @day_off.calendar_type.image,:size => "75x75"
 = link_to 'Edit', edit_day_off_path(@day_off)
 |
 \#{link_to 'Back', day_offs_path}
