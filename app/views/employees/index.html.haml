@@ -1,24 +1,15 @@
 %center
   %h1 Listing employees
-  %table.table
-    %thead
-      %tr
-        %th Photo
-        %th Name
-        %th First lastname
-        %th Second lastname
-        %th Type
-        %th
-        %th
-    %tbody
-      - @employees.each do |employee|
-        %tr
-          %td= link_to image_tag(employee.image, :size => "75x75"), employee
-          %td= employee.name
-          %td= employee.first_lastname
-          %td= employee.second_lastname
-          %td= image_tag(employee.calendar_type.image,:size => "50x50")
-          %td= link_to 'Edit', edit_employee_path(employee)
-          %td= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }
+  - @employees.each do |employee|
+    %div{class: "col-xs-6 col-md-3"}
+      %div{class: "thumbnail btn-default"}
+        %div{ class: "media"}
+          %div{class: "pull-left"}
+            =link_to image_tag(employee.image, :size => "100x100"), employee
+          %div{class: "media-body"}
+            %p= employee.name + " " + employee.first_lastname + " " + employee.second_lastname
+            %p= image_tag(employee.calendar_type.image,:size => "50x50")
+            = link_to 'Edit', edit_employee_path(employee)
+            \#{ link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }}
   %br/
-  = link_to 'New Employee', new_employee_path
+  = link_to 'New Employee', new_employee_path, :class => "btn btn-primary"
