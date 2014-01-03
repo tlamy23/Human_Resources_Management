@@ -4,13 +4,13 @@
     .thumbnail.btn-default
       .media
         .pull-left
-          =link_to image_tag(employee.image, :size => "100x100"), employee
+          = image_tag(employee.image, :size => "100x100")
         .media-body
           %center
-            %p= employee.name + " " + employee.first_lastname + " " + employee.second_lastname
+            %h4= link_to employee.name + " " + employee.first_lastname + " " + employee.second_lastname, employee,:class => "label label-info"
             %p= image_tag(employee.calendar_type.image,:size => "50x50")
             = link_to 'Edit', edit_employee_path(employee)
-            \#{ link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }}
+            = link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }
 .form-group
   %center
     = link_to 'New Employee', new_employee_path, :class => "btn btn-primary"

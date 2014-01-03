@@ -7,15 +7,14 @@
           = image_tag(schedule_carwash.employee.image,:size=>"100x100")
         .media-body
           %center
-            %p.label.label-info= schedule_carwash.turn
+            %h4= link_to schedule_carwash.turn, schedule_carwash, :class => "label label-info"
             %p= schedule_carwash.employee.name + ' ' + schedule_carwash.employee.first_lastname
             %p= schedule_carwash.date
-            = link_to 'Show', schedule_carwash
-            \#{link_to 'Edit', edit_schedule_carwash_path(schedule_carwash)}
-            \#{link_to 'Destroy', schedule_carwash, method: :delete, data: { confirm: 'Are you sure?' }}
+            = link_to 'Edit', edit_schedule_carwash_path(schedule_carwash)
+            = link_to 'Destroy', schedule_carwash, method: :delete, data: { confirm: 'Are you sure?' }
 .form-group
   %center
     .control
-      = link_to 'New Schedule carwash', new_schedule_carwash_path
+      = link_to 'New Schedule carwash', new_schedule_carwash_path,:class => "btn btn-primary"
     .control
-      = link_to "Generate",{:action => "generateSchedule"}
+      = link_to "Generate",{:action => "generateSchedule"},:class => "btn btn-primary"
