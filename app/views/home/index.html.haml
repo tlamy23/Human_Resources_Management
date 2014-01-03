@@ -10,10 +10,9 @@
   .calendar
     %center
       %h1
-        = link_to image_tag("back.ico", :size => "25x25"),{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month",:class =>"btn-default"
-        = @day.strftime("%Y/%m")
-        / FECHA ANIO/MES
-        = link_to image_tag("forward.ico", :size => "25x25"),{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month",:class =>"btn-default"
+        = link_to image_tag("back.ico", :size => "25x25"),{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month",:class =>"btn btn-primary"
+        =@day.strftime("%Y/%m")
+        = link_to image_tag("forward.ico", :size => "25x25"),{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month",:class =>"btn btn-primary"
   %table.table
     %thead
       %th Sun

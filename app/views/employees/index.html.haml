@@ -1,15 +1,16 @@
-%center
-  %h1 Listing employees
-  - @employees.each do |employee|
-    %div{class: "col-xs-6 col-md-3"}
-      %div{class: "thumbnail btn-default"}
-        %div{ class: "media"}
-          %div{class: "pull-left"}
-            =link_to image_tag(employee.image, :size => "100x100"), employee
-          %div{class: "media-body"}
+%h1 Listing employees
+- @employees.each do |employee|
+  .col-xs-8.col-md-3
+    .thumbnail.btn-default
+      .media
+        .pull-left
+          =link_to image_tag(employee.image, :size => "100x100"), employee
+        .media-body
+          %center
             %p= employee.name + " " + employee.first_lastname + " " + employee.second_lastname
             %p= image_tag(employee.calendar_type.image,:size => "50x50")
             = link_to 'Edit', edit_employee_path(employee)
             \#{ link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }}
-  %br/
-  = link_to 'New Employee', new_employee_path, :class => "btn btn-primary"
+.form-group
+  %center
+    = link_to 'New Employee', new_employee_path, :class => "btn btn-primary"
