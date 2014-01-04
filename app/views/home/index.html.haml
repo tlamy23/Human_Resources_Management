@@ -28,7 +28,7 @@
     - while @month == @day.month
       %tr
         - @days.each do|d|
-          %div.col-xs-6.col-sm-3
+          .col-xs-6.col-sm-3
             %td{:id => "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",:class =>"thumbnail btn-default"}
               - if @day.strftime("%a") == d
                 - @daysoff=DayOff.where(:date=>@day)
@@ -40,7 +40,7 @@
                       / CARWASH
                       - s = ScheduleCarwash.where(:date=>@day).order(:turn)
                       - if s.count>0
-                        %a.tt{href: '/schedule_carwashes#index', id: "CarWash-target-"+@day.day.to_s}
+                        %a.tt{href: schedule_carwashes_path, id: "CarWash-target-"+@day.day.to_s}
                           %span.glyphicon.glyphicon-road
                           = content_tag :div, id: "CarWash-content-"+@day.day.to_s, style: "display:none" do
                             .panel.panel-info
