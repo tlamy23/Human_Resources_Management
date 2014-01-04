@@ -8,65 +8,88 @@
   
 %center
   .calendar
-    %center
-      %h1
-        = link_to image_tag("back.ico", :size => "25x25"),{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month",:class =>"btn btn-primary"
-        =@day.strftime("%Y/%m")
-        = link_to image_tag("forward.ico", :size => "25x25"),{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month",:class =>"btn btn-primary"
+    %table
+      %tr
+        %td
+          %h1= link_to "",{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month",:class =>"glyphicon glyphicon-chevron-left"
+        %td
+          %h1=@day.strftime("%Y/%m")
+        %td
+          %h1= link_to "",{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month",:class =>"glyphicon glyphicon-chevron-right"
   %table.table
     %thead
-      %th Sun
-      %th.active Mon
-      %th.active Tur
-      %th.active wen
-      %th.active Thu
-      %th.active Fri
-      %th Sat
+      %th.btn-lg.active Sun
+      %th.btn-lg.label-info Mon
+      %th.btn-lg.label-info Tur
+      %th.btn-lg.label-info wen
+      %th.btn-lg.label-info Thu
+      %th.btn-lg.label-info Fri
+      %th.btn-lg.active Sat
     - while @month == @day.month
       %tr
         - @days.each do|d|
-          %td{:id => "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",:class =>"thumbnail btn-default"}
-            %div
+          %div.col-xs-6.col-sm-3
+            %td{:id => "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",:class =>"thumbnail btn-default"}
               - if @day.strftime("%a") == d
                 - @daysoff=DayOff.where(:date=>@day)
                 %h3
                   = @day.day.to_s
-                  / DIA
-                  %div
-                    - @daysoff.each do|dayoff|
-                      = image_tag(dayoff.calendar_type.image, :size => "25x25",:title=>dayoff.name)
                 %table
                   %tr
                     %td{:id => "td#{@day.day.to_s}"}
                       / CARWASH
                       - s = ScheduleCarwash.where(:date=>@day).order(:turn)
                       - if s.count>0
-                        = link_to image_tag("carwash.ico", :size => "25x25") ,'/schedule_carwashes#index', :id=>"CarWash-target-"+@day.day.to_s,:class=>"tt"
-                        = content_tag :div, id: "CarWash-content-"+@day.day.to_s, style: "display:none" do
-                          %p
-                            - s.each do |sc|
-                              %div
-                                = image_tag(sc.employee.image, :size => "35x35")
-                                = sc.employee.name + ' ' + sc.employee.first_lastname
-                                %br/
+                        %a.tt{href: '/schedule_carwashes#index', id: "CarWash-target-"+@day.day.to_s}
+                          %span.glyphicon.glyphicon-road
+                          = content_tag :div, id: "CarWash-content-"+@day.day.to_s, style: "display:none" do
+                            .panel.panel-info
+                              .panel-heading
+                                .panel-tittle
+                                  CarWash
+                              .panel-body
+                                - s.each do |sc|
+                                  %ul.nav.nav-pills
+                                    %li
+                                      = image_tag(sc.employee.image, :size => "35x35")
+                                      = sc.employee.name + ' ' + sc.employee.first_lastname
                     %td
                       - b=Employee.where(:birthdate=>@day)
                       / BIRTHDATE
                       - if b.count>0
-                        = link_to image_tag('gift.ico', :size => "25x25"),'/employees#index' ,:id=>"BirthDate-target-"+@day.day.to_s,:class=>"tt"
-                        = content_tag :div, id: "BirthDate-content-"+@day.day.to_s,style:"display:none" do
-                          %p
-                            - b.each do |bd|
-                              %div
-                                = image_tag(bd.image, :size => "35x35")
-                                = bd.name + ' ' + bd.first_lastname
+                        %a.tt{href: employees_path ,id: "BirthDate-target-"+@day.day.to_s}
+                          %span.glyphicon.glyphicon-gift
+                          = content_tag :div, id: "BirthDate-content-"+@day.day.to_s,style:"display:none" do
+                            .panel.panel-info
+                              .panel-heading
+                                .panel-tittle
+                                  BirthDate
+                              .panel-body
+                                - b.each do |bd|
+                                  %ul.na.nav-pills
+                                    %li
+                                      = image_tag(bd.image, :size => "35x35")
+                                      = bd.name + ' ' + bd.first_lastname
                   %tr
                     %td
-                      - image_tag('event.ico', :size => "25x25",:title=>"Event")
+                      %div
+                        - if @daysoff.count>0
+                          %a.tt{href: day_offs_path,id: "DayOff-target-"+@day.day.to_s}
+                            %span.glyphicon.glyphicon-calendar
+                            =content_tag :div, id:"DayOff-content-"+@day.day.to_s,style: "display:none" do
+                              .panel.panel-info
+                                .panel-heading
+                                  .panel-title
+                                    Day Off
+                                .panel-body
+                                  - @daysoff.each do|dayoff|
+                                    %ul.nav.nav-pills
+                                      %li
+                                        = image_tag(dayoff.calendar_type.image, :size => "25x25")
+                                        = dayoff.name
                     %td
                       - image_tag('alarm.ico', :size => "25x25",:title=>"Meeting")
                 - @day += 1
                 - if @day.month!=@month
                   - break
-    %tbody
 
