@@ -1,0 +1,38 @@
+/content=> nombre
+- if content=="CarWash"
+  - c = ScheduleCarwash.where(:date=>day).order(:turn)
+  - path = "schedule_carwashes_path"
+- if content=="BirthDate"
+  - c=Employee.where(:birthdate=>day)
+- if content=="DayOff"
+  - c=DayOff.where(:date=>day)
+- if c.count>0
+  %a.col-md-1.tt{href: path, id: content+"-target-"+day.day.to_s}
+    - if content=="CarWash"
+      %span.glyphicon.glyphicon-road
+    - if content=="BirthDate"
+      %span.glyphicon.glyphicon-gift
+    - if content=="DayOff"
+      %span.glyphicon.glyphicon-calendar
+  = content_tag :div, id: content+"-content-"+day.day.to_s, style: "display:none",class: "span6" do
+    .panel.panel-info
+      .panel-heading
+        .panel-tittle
+          = content
+      .panel-body
+        - c.each do |e|
+          .media
+            .pull-left
+              - if content=="CarWash"
+                = image_tag(e.employee.image, :size => "35x35")
+              - if content=="BirthDate"
+                = image_tag(e.image, :size => "35x35")
+              - if content=="DayOff"
+                = image_tag(e.calendar_type.image, :size => "35x35")
+            .media-body
+              - if content=="CarWash"
+                = e.employee.name + ' ' + e.employee.first_lastname
+              - if content=="BirthDate"
+                = e.name + ' ' + e.first_lastname
+              - if content=="DayOff"
+                = e.name

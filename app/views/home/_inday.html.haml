@@ -1,0 +1,7 @@
+%h4
+  = day.day.to_s
+- if @wknd==false
+  = render "contentday", content: "CarWash", day: day
+  = render "contentday", content: "BirthDate", day: day
+  = render "contentday", content: "DayOff", day: day
+%span.glyphicon.glyphicon-stop{style: "visibility:hidden;"}
