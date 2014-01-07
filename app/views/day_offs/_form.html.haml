@@ -1,0 +1,26 @@
+= form_for(@day_off) do |f|
+  - if @day_off.errors.any?
+    #error_explanation.alert.alert-danger
+      %h2
+        = pluralize(@day_off.errors.count, "error")
+        prohibited this day_off from being saved:
+      %ul
+        - @day_off.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = f.label :name, :class => "control-label"
+    = f.text_field :name, :class => "form-control"
+  .form-group
+    = f.label :date, :class => "control-label"
+    %br/
+    = f.date_select :date, :class => "form-control"
+  .form-group
+    = f.label :calendar_type_id, :class => "control-label"
+    %br/
+    - CalendarType.all.each do |t|
+      .checkbox
+        = check_box_tag 'calendar_type_id[]',t.id
+        %label.control-label= t.name
+        %br/
+  .actions
+    = f.submit :class =>"btn btn-Primary"

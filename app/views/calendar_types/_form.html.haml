@@ -1,0 +1,23 @@
+= form_for(@calendar_type) do |f|
+  - if @calendar_type.errors.any?
+    #error_explanation.alert.alert-danger
+      %h2
+        = pluralize(@calendar_type.errors.count, "error")
+        prohibited this calendar_type from being saved:
+      %ul
+        - @calendar_type.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = f.label "Image", :class => "control-label"
+    %br/
+    = image_tag(@calendar_type.image, :size => "75x75", :class => "img-thumbnail")
+  .form-group
+    = f.label :name, :class => "control-label"
+    %br/
+    = f.text_field :name,:class =>"form-control"
+  .form-group
+    = f.label "Image", :class => "control-label"
+    %br/
+    = f.file_field :dataimage,:class =>"form-control"
+  .form-group
+    = f.submit :class =>"btn btn-Primary"

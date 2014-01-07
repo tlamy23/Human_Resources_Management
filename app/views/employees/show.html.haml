@@ -1,0 +1,22 @@
+%center
+  %p#notice= notice
+  %p
+    = image_tag(@employee.image, :size => "200x200")
+  %p
+    %strong Name:
+    = @employee.name
+  %p
+    %strong First lastname:
+    = @employee.first_lastname
+  %p
+    %strong Second lastname:
+    = @employee.second_lastname
+  %p
+    %strong Birthdate:
+    = @employee.birthdate
+  %p
+    %strong Calendar Type:
+    = image_tag(@employee.calendar_type.image,:size => "50x50")
+  = link_to 'Edit', edit_employee_path(@employee)
+  |
+  \#{link_to 'Back', employees_path}

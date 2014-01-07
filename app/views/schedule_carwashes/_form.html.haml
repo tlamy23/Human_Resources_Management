@@ -1,0 +1,18 @@
+= form_for(@schedule_carwash) do |f|
+  - if @schedule_carwash.errors.any?
+    #error_explanation{class: "alert alert-danger"}
+      %h2
+        = pluralize(@schedule_carwash.errors.count, "error")
+        prohibited this schedule_carwash from being saved:
+      %ul
+        - @schedule_carwash.errors.full_messages.each do |msg|
+          %li= msg
+  %div{class: "form-group"}
+    = f.label :date, :class=> "control-label"
+    .control
+      = f.date_select :date, :class => "form-control"
+  %div{class: "form-group"}
+    = f.label :employee_id, :class=> "control-label"
+    = f.select :employee_id,Employee.all.collect{|t|[t.name + ' ' + t.first_lastname,t.id]},{:include_blank=>true}, {:class => "form-control"}
+  %div{class: "form-group"}
+    = f.submit :class => "btn btn-primary"

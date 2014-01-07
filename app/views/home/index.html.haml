@@ -1,0 +1,97 @@
+= content_for :scripts do
+  = javascript_include_tag "/assets/home.js"
+- if @day==nil
+  - @day=Date.today
+- @month = @day.month
+- @day= @day - @day.day
+- @day += 1
+- @days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+%input{:id => "dateToday",:type=>"text",:name=>"dateToday",:value=>Date.today.year.to_s+Date.today.month.to_s+Date.today.day.to_s,:style=> "display:none"}
+  
+%center
+  .calendar
+    %table
+      %tr
+        %td
+          %h1= link_to "",{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month",:class =>"glyphicon glyphicon-chevron-left"
+        %td
+          %h1=@day.strftime("%Y/%m")
+        %td
+          %h1= link_to "",{:controller => "home", :action => "nextMonth", :date => @day },:title=>"Next Month",:class =>"glyphicon glyphicon-chevron-right"
+  %table.table
+    %thead
+      %th.btn-lg.active Sun
+      %th.btn-lg.label-info Mon
+      %th.btn-lg.label-info Tur
+      %th.btn-lg.label-info wen
+      %th.btn-lg.label-info Thu
+      %th.btn-lg.label-info Fri
+      %th.btn-lg.active Sat
+    - while @month == @day.month
+      %tr
+        - @days.each do|d|
+          .col-xs-6.col-sm-3
+            %td{:id => "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",:class =>"thumbnail btn-default"}
+              - if @day.strftime("%a") == d
+                - @daysoff=DayOff.where(:date=>@day)
+                %h3
+                  = @day.day.to_s
+                %table
+                  %tr
+                    %td{:id => "td#{@day.day.to_s}"}
+                      / CARWASH
+                      - s = ScheduleCarwash.where(:date=>@day).order(:turn)
+                      - if s.count>0
+                        %a.tt{href: schedule_carwashes_path, id: "CarWash-target-"+@day.day.to_s}
+                          %span.glyphicon.glyphicon-road
+                          = content_tag :div, id: "CarWash-content-"+@day.day.to_s, style: "display:none" do
+                            .panel.panel-info
+                              .panel-heading
+                                .panel-tittle
+                                  CarWash
+                              .panel-body
+                                - s.each do |sc|
+                                  %ul.nav.nav-pills
+                                    %li
+                                      = image_tag(sc.employee.image, :size => "35x35")
+                                      = sc.employee.name + ' ' + sc.employee.first_lastname
+                    %td
+                      - b=Employee.where(:birthdate=>@day)
+                      / BIRTHDATE
+                      - if b.count>0
+                        %a.tt{href: employees_path ,id: "BirthDate-target-"+@day.day.to_s}
+                          %span.glyphicon.glyphicon-gift
+                          = content_tag :div, id: "BirthDate-content-"+@day.day.to_s,style:"display:none" do
+                            .panel.panel-info
+                              .panel-heading
+                                .panel-tittle
+                                  BirthDate
+                              .panel-body
+                                - b.each do |bd|
+                                  %ul.na.nav-pills
+                                    %li
+                                      = image_tag(bd.image, :size => "35x35")
+                                      = bd.name + ' ' + bd.first_lastname
+                  %tr
+                    %td
+                      %div
+                        - if @daysoff.count>0
+                          %a.tt{href: day_offs_path,id: "DayOff-target-"+@day.day.to_s}
+                            %span.glyphicon.glyphicon-calendar
+                            =content_tag :div, id:"DayOff-content-"+@day.day.to_s,style: "display:none" do
+                              .panel.panel-info
+                                .panel-heading
+                                  .panel-title
+                                    Day Off
+                                .panel-body
+                                  - @daysoff.each do|dayoff|
+                                    %ul.nav.nav-pills
+                                      %li
+                                        = image_tag(dayoff.calendar_type.image, :size => "25x25")
+                                        = dayoff.name
+                    %td
+                      - image_tag('alarm.ico', :size => "25x25",:title=>"Meeting")
+                - @day += 1
+                - if @day.month!=@month
+                  - break
+

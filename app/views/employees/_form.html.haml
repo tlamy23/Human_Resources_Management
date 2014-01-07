@@ -1,0 +1,39 @@
+= form_for(@employee)  do |f|
+  - if @employee.errors.any?
+    #error_explanation.alert.alert-danger
+      %h2
+        = pluralize(@employee.errors.count, "error")
+        prohibited this employee from being saved:
+      %ul
+        - @employee.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = f.label "Photo", :class => "control-label"
+    %br/
+    = image_tag(@employee.image, :size => "200x200", :class => "img-thumbnail")
+  .form-group
+    = f.label :name, :class => "control-label"
+    .control
+      = f.text_field :name,:class =>"form-control"
+  .form-group
+    = f.label :first_lastname, :class => "control-label"
+    .control
+      = f.text_field :first_lastname,:class =>"form-control"
+  .form-group
+    = f.label :second_lastname, :class => "control-label"
+    .control
+      = f.text_field :second_lastname,:class =>"form-control"
+  .form-group
+    = f.label :calendar_type_id, :class => "control-label"
+    .control
+      = f.select :calendar_type_id,CalendarType.all.collect{|t|[t.name,t.id]}, {:include_blank => true},{:class => "form-control"}
+  .form-group
+    = f.label :birthdate, :class => "control-label"
+    .control
+      = f.date_select :birthdate,:class => "form-control"
+  .form-group
+    = f.label "Image", :class => "control-label"
+    .control
+      = f.file_field :dataimage,:class =>"form-control"
+  .form-group
+    = f.submit :class =>"btn btn-Primary"
