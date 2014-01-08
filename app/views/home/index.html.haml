@@ -9,7 +9,6 @@
 - @days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
 %input{:id => "dateToday",:type=>"text",:name=>"dateToday",:value=>Date.today.year.to_s+Date.today.month.to_s+Date.today.day.to_s,:style=> "display:none"}
 
-/Control Months Prev|Next
 %ul.list-inline
   %li
     %h1= link_to "",{:controller => "home", :action => "prevMonth", :date => @day },:title=>"Previous Month",:class =>"glyphicon glyphicon-chevron-left"
@@ -20,7 +19,6 @@
 
 .row.col-md-12.col-xs-12
   %ul.list-inline
-    /HEAD DAYS
     - @days.each do |dn|
       - if dn=="Sun" || dn=="Sat"
         %li.col-md-1.col-xs-1.thumbnail.alert-info
@@ -30,7 +28,6 @@
         %li.col-md-2.col-xs-2.thumbnail.alert-success
           %center
             = dn
-    /DAYS
     - while @month == @day.month
       - @days.each do|d|
         - if d=="Sun"||d=="Sat"
