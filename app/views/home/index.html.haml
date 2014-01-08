@@ -1,12 +1,9 @@
 = content_for :scripts do
   = javascript_include_tag "/assets/home.js"
   = stylesheet_link_tag "/assets/home.css"
-- if @day==nil
-  - @day=Date.today
-- @month = @day.month
-- @day= @day - @day.day
-- @day += 1
+- @day=calendar_day(@day)
 - @days=calendar_days
+- @month = @day.month
 
 %input{:id => "dateToday",:type=>"text",:name=>"dateToday",:value=>Date.today.year.to_s+Date.today.month.to_s+Date.today.day.to_s,:style=> "display:none"}
 
@@ -26,7 +23,7 @@
           = dn["label"]
     - while @month == @day.month
       - @days.each do|d|
-        %li.thumbnail{id: "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",class: d["clas"] }
+        %li.thumbnail{id: "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",class: d["clas2"] }
           - if @day.strftime("%a") == d["label"]
             = render "home/inday", day: @day, wknd: d["wknd"]
             - @day += 1

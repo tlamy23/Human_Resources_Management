@@ -21,20 +21,27 @@ module ApplicationHelper
 
 	def calendar_days
 		days = []
-		day = {"label"=> "Sun","wknd"=> true,"clas"=> "col-md-1 col-xs-1 thumbnail alert-info"}
+		day = {"label"=> "Sun","wknd"=> true,"clas"=> "col-md-1 col-xs-1 thumbnail alert-warning","clas2"=> "col-md-1 col-xs-1 thumbnail alert-warning"}
 		days.push(day)
-		day = {"label"=> "Mon","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		day = {"label"=> "Mon","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info","clas2"=> "col-md-2 col-xs-2 thumbnail alert-success"}
 		days.push(day)
-		day = {"label"=> "Tue","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		day = {"label"=> "Tue","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info","clas2"=> "col-md-2 col-xs-2 thumbnail alert-success"}
 		days.push(day)
-		day = {"label"=> "Wed","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		day = {"label"=> "Wed","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info","clas2"=> "col-md-2 col-xs-2 thumbnail alert-success"}
 		days.push(day)
-		day = {"label"=> "Thu","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		day = {"label"=> "Thu","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info","clas2"=> "col-md-2 col-xs-2 thumbnail alert-success"}
 		days.push(day)
-		day = {"label"=> "Fri","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		day = {"label"=> "Fri","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info","clas2"=> "col-md-2 col-xs-2 thumbnail alert-success"}
 		days.push(day)
-		day = {"label"=>"Sat","wknd"=>true,"clas"=>"col-md-1 col-xs-1 thumbnail alert-info"}
+		day = {"label"=> "Sat","wknd"=> true,"clas"=> "col-md-1 col-xs-1 thumbnail alert-warning","clas2"=> "col-md-1 col-xs-1 thumbnail alert-warning"}
 		days.push(day)
 		return days
+	end
+	def calendar_day(day)
+		if day==nil
+  			day=Date.today
+  		end
+		day= day - day.day
+		day += 1
 	end
 end
