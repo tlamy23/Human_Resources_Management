@@ -6,7 +6,8 @@
 - @month = @day.month
 - @day= @day - @day.day
 - @day += 1
-- @days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+- @days=calendar_days
+
 %input{:id => "dateToday",:type=>"text",:name=>"dateToday",:value=>Date.today.year.to_s+Date.today.month.to_s+Date.today.day.to_s,:style=> "display:none"}
 
 %ul.list-inline
@@ -20,30 +21,16 @@
 .row.col-md-12.col-xs-12
   %ul.list-inline
     - @days.each do |dn|
-      - if dn=="Sun" || dn=="Sat"
-        %li.col-md-1.col-xs-1.thumbnail.alert-info
-          %center
-            = dn
-      - else
-        %li.col-md-2.col-xs-2.thumbnail.alert-success
-          %center
-            = dn
+      %li{class: dn["clas"]}
+        %center
+          = dn["label"]
     - while @month == @day.month
       - @days.each do|d|
-        - if d=="Sun"||d=="Sat"
-          - @d="col-md-1 col-xs-1"
-          - @stly=" alert-danger"
-          - @wknd= true
-        -else
-          - @d="col-md-2 col-xs-2"
-          - @stly=" alert-warning" 
-          - @wknd= false
-        %li.thumbnail{id: "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",class: @d.to_s+@stly }
-          - if @day.strftime("%a") == d
-            = render "home/inday", day: @day, wknd: @wknd
+        %li.thumbnail{id: "td#{@day.year.to_s+@day.month.to_s+@day.day.to_s}",class: d["clas"] }
+          - if @day.strftime("%a") == d["label"]
+            = render "home/inday", day: @day, wknd: d["wknd"]
             - @day += 1
             - if @day.month != @month
               - break
-          
               
 

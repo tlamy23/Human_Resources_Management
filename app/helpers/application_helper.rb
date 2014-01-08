@@ -18,4 +18,23 @@ module ApplicationHelper
 	def day_mediabody_content(name,day,object)
 		HomeH.new(name,nil,object).day_mediabody_content
 	end
+
+	def calendar_days
+		days = []
+		day = {"label"=> "Sun","wknd"=> true,"clas"=> "col-md-1 col-xs-1 thumbnail alert-info"}
+		days.push(day)
+		day = {"label"=> "Mon","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		days.push(day)
+		day = {"label"=> "Tue","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		days.push(day)
+		day = {"label"=> "Wed","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		days.push(day)
+		day = {"label"=> "Thu","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		days.push(day)
+		day = {"label"=> "Fri","wknd"=> false,"clas"=> "col-md-2 col-xs-2 thumbnail alert-info"}
+		days.push(day)
+		day = {"label"=>"Sat","wknd"=>true,"clas"=>"col-md-1 col-xs-1 thumbnail alert-info"}
+		days.push(day)
+		return days
+	end
 end
