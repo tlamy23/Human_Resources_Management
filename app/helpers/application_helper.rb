@@ -38,9 +38,7 @@ module ApplicationHelper
 		return days
 	end
 	def calendar_day(day)
-		if day==nil
-  			day=Date.today
-  		end
+  		day=Date.today if day.nil?
 		day= day - day.day
 		day += 1
 	end
