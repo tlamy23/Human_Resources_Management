@@ -2,9 +2,9 @@
 - path = day_pathlink_content(content)
 - icon = day_icon_content(content)
 - if c.count>0
-  %a.col-md-1.tt{href: path, id: content+"-target-"+day.day.to_s}
+  %a.col-md-1.tt{href: path, id: "#{content}-target-#{day.day}"}
     = icon
-  = content_tag :div, id: content+"-content-"+day.day.to_s, style: "display:none",class: "span6" do
+  = content_tag :div, id: "#{content}-content-#{day.day}", style: "display:none",class: "span6" do
     .panel.panel-info
       .panel-heading
         .panel-tittle

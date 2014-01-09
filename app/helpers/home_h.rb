@@ -16,13 +16,7 @@ class HomeH
 	end
 
 	def day_pathlink_content
-		if @name == "CarWash"
-			"/schedule_carwashes"
-		elsif @name == "BirthDate"
-			"/employees"
-		elsif @name == "DayOff"
-			"/day_offs"
-		end
+		@name == "CarWash" ? '/schedule_carwashes' : @name == "BirthDate" ? '/employees' : @name == "DayOff" ? '/day_offs' : ""
 	end
 
 	def day_icon_content
@@ -48,9 +42,9 @@ class HomeH
 
 	def day_mediabody_content
 		if @name=="CarWash"
-    		@object.employee.name + ' ' + @object.employee.first_lastname
+    		"#{@object.employee.name} #{@object.employee.first_lastname}"
     	elsif @name=="BirthDate"
-    		@object.name + ' ' + @object.first_lastname
+    		"#{@object.name} #{@object.first_lastname}"
     	elsif @name=="DayOff"
     		@object.name
     	end
