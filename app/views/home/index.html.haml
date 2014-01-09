@@ -7,15 +7,16 @@
 
 %input{id: "dateToday",type: "text",name: "dateToday",value: "#{Date.today.year}#{Date.today.month}#{Date.today.day}",style: "display:none"}
 
-%ul.list-inline
-  %li
-    %h1= link_to "",{controller: "home", action: "prevMonth", date: @dayn },title: "Previous Month",class: "glyphicon glyphicon-chevron-left"
-  %li
-    %h1=@dayn.strftime("%Y/%m")
-  %li
-    %h1= link_to "",{controller: "home", action: "nextMonth", date: @dayn },title: "Next Month",class: "glyphicon glyphicon-chevron-right"
+.col-md-12.col-xs-12
+  %ul.list-inline
+    %li
+      %h1= link_to "",{controller: "home", action: "prevMonth", date: @dayn },title: "Previous Month",class: "glyphicon glyphicon-chevron-left"
+    %li
+      %h1=@dayn.strftime("%Y/%m")
+    %li
+      %h1= link_to "",{controller: "home", action: "nextMonth", date: @dayn },title: "Next Month",class: "glyphicon glyphicon-chevron-right"
 
-.row.col-lg-12.col-md-12.col-xs-12
+.row.col-md-12.col-xs-12
   %ul.list-inline
     - @days.each do |dn|
       %li{class: dn["clas"]}

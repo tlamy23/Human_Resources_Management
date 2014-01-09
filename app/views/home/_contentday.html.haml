@@ -2,9 +2,9 @@
 - path = day_pathlink_content(content)
 - icon = day_icon_content(content)
 - if c.count>0
-  %a.col-md-1.tt{href: path, id: "#{content}-target-#{day.day}"}
+  %a.col-md-1.col-xs-1.tt{href: path, id: "#{content}-target-#{day.day}"}
     = icon
-  = content_tag :div, id: "#{content}-content-#{day.day}", style: "display:none",class: "tooltip" do
+  = content_tag :div, id: "#{content}-content-#{day.day}", style: "display:none" do
     - c.each do |e|
       .media
         .pull-left
@@ -12,4 +12,6 @@
           = image_tag(media, :size => "35x35")
         .media-body
           - mbody = day_mediabody_content(content,nil,e)
-          = mbody          
+          = mbody
+- else
+  %span.col-md-1.col-xs-1.glyphicon.glyphicon-stop{style: "visibility:hidden;"}          

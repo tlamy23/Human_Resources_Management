@@ -8,10 +8,11 @@
     = csrf_meta_tags
     = yield :scripts
   %body
-    %header
-      = render 'layouts/navigation'
-    %main{:role => "main"}
-      = render 'layouts/messages'
-    .col-md-offset-1.col-md-10
+    .col-md-offset-2.col-xs-offset-2.col-md-8.col-xs-8
+      %header
+        = render 'layouts/navigation'
+      %main{:role => "main"}
+        = render 'layouts/messages'
+    .col-md-offset-1.col-md-10.col-xs-offset-1.col-xs-10
       = yield
 
