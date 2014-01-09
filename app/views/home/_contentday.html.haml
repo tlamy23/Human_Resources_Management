@@ -1,0 +1,21 @@
+- c = day_list_content(content,day)
+- path = day_pathlink_content(content)
+- icon = day_icon_content(content)
+- if c.count>0
+  %a.col-md-1.tt{href: path, id: "#{content}-target-#{day.day}"}
+    = icon
+  = content_tag :div, id: "#{content}-content-#{day.day}", style: "display:none",class: "span6" do
+    .panel.panel-info
+      .panel-heading
+        .panel-tittle
+          = content
+      .panel-body
+        - c.each do |e|
+          - media = day_media_content(content,nil,e)
+          - mbody = day_mediabody_content(content,nil,e)
+          .media
+            .pull-left
+              = image_tag(media, :size => "35x35")
+            .media-body
+              = mbody
+              
