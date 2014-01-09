@@ -10,6 +10,8 @@ ready= ->
       trigger: 'hover',
       html: true,
       content: $(strid).html()
-
+      container: 'body'
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
+
