@@ -37,15 +37,9 @@ class ScheduleCarwashesController < ApplicationController
           @d=nil
         end
         if @d!=nil
-          puts('find:'+@i.to_s)
-          puts(@d.date.to_s)
-          puts(@d.employee.name)
-          puts(@d.turn.to_s)
           @i += 1
         else
-          puts('not find:'+@i.to_s)
           @schedule_carwash.turn=@i
-          puts('guardando')
           @bndr= @schedule_carwash.save
           break
         end
@@ -53,14 +47,13 @@ class ScheduleCarwashesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @schedule_carwash, notice: 'Schedule carwash was successfully created.' }
         format.json { render action: 'show', status: :created, location: @schedule_carwash }
-        format.html { render action: 'new' }
-        format.json { render json: @schedule_carwash.errors, status: :unprocessable_entity }
+        @errors=@schedule_carwash.errors
       end
     else
       respond_to do |format|
         @schedule_carwash.errors.add :date,'the Schedule day selected is complete'
         format.html { render action: 'new' }
-        format.json { render json: @schedule_carwash.errors, status: :unprocessable_entity }
+        @errors=@schedule_carwash.errors
       end
     end
   end
@@ -73,8 +66,8 @@ class ScheduleCarwashesController < ApplicationController
         format.html { redirect_to @schedule_carwash, notice: 'Schedule carwash was successfully updated.' }
         format.json { head :no_content }
       else
+        @errors=@schedule_carwash.errors
         format.html { render action: 'edit' }
-        format.json { render json: @schedule_carwash.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -90,34 +83,18 @@ class ScheduleCarwashesController < ApplicationController
   end
 
   def generateSchedule
-    puts("start schedule")
-
     @count = (Employee.count.to_s + '.0').to_f 
-    puts("count "+ @count.to_s)
-
     @ePerDay = 5.0
-    puts("ePerDay " + @ePerDay.to_s)
-
     @e = Employee.order(first_lastname: :desc)
-    @e.each do |e|
-      puts(e.name + ' ' + e.first_lastname)
-    end
-
     @i = (@count/@ePerDay).ceil
-    puts("i " + @i.to_s)
-
     @startday = Date.today
-    puts("startday " + @startday.to_s)
     
     while @i > 0
        @ePerDay = 5.0
-       puts("ePerDay " + @ePerDay.to_s)
 
       while @startday.strftime("%a") == "Sat" || @startday.strftime("%a") == "Sun"
-        puts("startday" + @startday.to_s)
 
         @startday += 1
-        puts("startday" + @startday.to_s)
       end
       @j=1
       while @ePerDay > 0
@@ -125,25 +102,18 @@ class ScheduleCarwashesController < ApplicationController
         @schedule.turn = @j
         @schedule.employee = @e[@count-1]
         @schedule.date = @startday
-        puts(@schedule.employee.name + ' ' + @schedule.employee.first_lastname)
 
         @save=@schedule.save
-        puts("Save schedule: " + @save.to_s)
 
         @count -= 1
-        puts("count "+ @count.to_s)
 
         @ePerDay -= 1
-        puts("ePerDay " + @ePerDay.to_s)
 
         @j += 1
-        puts("j " + @j.to_s)
       end
       @i -= 1
-      puts("i " + @i.to_s)
 
       @startday +=1
-      puts("startday " + @startday.to_s)
     end
     redirect_to "/schedule_carwashes#index"
   end

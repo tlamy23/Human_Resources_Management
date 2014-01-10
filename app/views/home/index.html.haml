@@ -1,19 +1,20 @@
 = content_for :scripts do
   = javascript_include_tag "/assets/home.js"
   = stylesheet_link_tag "/assets/home.css"
-- @day=calendar_day(@day)
+- @dayn=calendar_day(@day)
 - @days=calendar_days
-- @month = @day.month
+- @month = @dayn.month
 
 %input{id: "dateToday",type: "text",name: "dateToday",value: "#{Date.today.year}#{Date.today.month}#{Date.today.day}",style: "display:none"}
 
-%ul.list-inline
-  %li
-    %h1= link_to "",{controller: "home", action: "prevMonth", date: @day },title: "Previous Month",class: "glyphicon glyphicon-chevron-left"
-  %li
-    %h1=@day.strftime("%Y/%m")
-  %li
-    %h1= link_to "",{controller: "home", action: "nextMonth", date: @day },title: "Next Month",class: "glyphicon glyphicon-chevron-right"
+.col-md-12.col-xs-12
+  %ul.list-inline
+    %li
+      %h1= link_to "",{controller: "home", action: "prevMonth", date: @dayn },title: "Previous Month",class: "glyphicon glyphicon-chevron-left"
+    %li
+      %h1=@dayn.strftime("%Y/%m")
+    %li
+      %h1= link_to "",{controller: "home", action: "nextMonth", date: @dayn },title: "Next Month",class: "glyphicon glyphicon-chevron-right"
 
 .row.col-md-12.col-xs-12
   %ul.list-inline
@@ -21,13 +22,10 @@
       %li{class: dn["clas"]}
         %center
           = dn["label"]
-    - while @month == @day.month
+    - while @month == @dayn.month
       - @days.each do|d|
-        %li.thumbnail{id: "td#{@day.year}#{@day.month}#{@day.day}",class: d["clas2"] }
-          - if @day.strftime("%a") == d["label"]
-            = render "home/inday", day: @day, wknd: d["wknd"]
-            - @day += 1
-            - if @day.month != @month
-              - break
-              
-
+        %li.thumbnail{id: "td#{@dayn.year}#{@dayn.month}#{@dayn.day}",class: d["clas2"] }
+          - if @dayn.strftime("%a") == d["label"]
+            = render "home/inday", day: @dayn, wknd: d["wknd"]
+            - @dayn += 1
+            - break if @dayn.month != @month

@@ -2,4 +2,5 @@
   = day.day.to_s
 - %w/CarWash BirthDate DayOff/.each do |c|
   = render "contentday", content: c, day: day unless wknd
-%span.glyphicon.glyphicon-stop{style: "visibility:hidden;"}
+  - if wknd==true
+    %span.col-md-1.col-xs-1.glyphicon.glyphicon-stop{style: "visibility:hidden;"}
