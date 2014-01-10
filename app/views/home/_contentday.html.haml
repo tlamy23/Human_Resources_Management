@@ -1,9 +1,9 @@
 - c = day_list_content(content,day)
+- controller = day_controller(content)
 - path = day_pathlink_content(content)
 - icon = day_icon_content(content)
 - if c.count>0
-  %a.col-md-1.col-xs-1.tt{href: path, id: "#{content}-target-#{day.day}"}
-    = icon
+  = link_to icon,{controller: controller , action: "#{content}byday", day: day },class: "col-md-1 col-xs-1 tt",id: "#{content}-target-#{day.day}"
   = content_tag :div, id: "#{content}-content-#{day.day}", style: "display:none" do
     - c.each do |e|
       .media

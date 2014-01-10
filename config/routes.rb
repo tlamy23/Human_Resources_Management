@@ -4,6 +4,9 @@ HumanResourcesManagement::Application.routes.draw do
   get 'generateSchedule', to: 'schedule_carwashes#generateSchedule'
   get 'prevMonth',to:'home#prevMonth'
   get 'nextMonth' ,to:'home#nextMonth'
+  get 'BirthDatebyday', to: 'employees#BirthDatebyday'
+  get 'CarWashbyday', to: 'schedule_carwashes#CarWashbyday'
+  get 'DayOffbyday', to: 'day_offs#DayOffbyday'
 
   resources :calendar_types
 

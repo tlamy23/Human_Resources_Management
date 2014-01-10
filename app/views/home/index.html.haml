@@ -24,7 +24,7 @@
           = dn["label"]
     - while @month == @dayn.month
       - @days.each do|d|
-        %li.thumbnail{id: "td#{@dayn.year}#{@dayn.month}#{@dayn.day}",class: d["clas2"] }
+        %li.thumbnail{id: "li-#{@dayn.year}-#{@dayn.month}-#{@dayn.day}",class: d["clas2"] }
           - if @dayn.strftime("%a") == d["label"]
             = render "home/inday", day: @dayn, wknd: d["wknd"]
             - @dayn += 1

@@ -75,6 +75,10 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def BirthDatebyday
+    @employees=Employee.where(birthdate: params[:day])
+    @day=params[:day]
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -88,5 +92,9 @@ class EmployeesController < ApplicationController
     end
     def image_params
       params.require(:employee).permit( :dataimage)
+    end
+
+    def bydate_params
+      params.require(:day)
     end
 end

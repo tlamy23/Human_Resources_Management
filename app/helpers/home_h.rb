@@ -49,4 +49,8 @@ class HomeH
     		@object.name
     	end
 	end
+
+	def day_controller
+		@name == "CarWash" ? 'schedule_carwashes' : @name == "BirthDate" ? 'employees' : @name == "DayOff" ? 'day_offs' : ""
+	end
 end

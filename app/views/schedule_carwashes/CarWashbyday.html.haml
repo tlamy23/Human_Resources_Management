@@ -1,8 +1,7 @@
 .page-header
   %h1 Listing Schedule CarWas
-  %small
-    = link_to 'New Schedule carwash', new_schedule_carwash_path,:class => "btn btn-primary"
-    = link_to "Generate",{:action => "generateSchedule"},:class => "btn btn-warning"
+  %h3
+    = @day
 - @schedule_carwashes.each do |schedule_carwash|
   .col-xs-8.col-md-4
     .thumbnail.btn-default
@@ -14,5 +13,3 @@
             %h4= link_to schedule_carwash.turn, schedule_carwash, :class => "label label-info"
             %p= schedule_carwash.employee.name + ' ' + schedule_carwash.employee.first_lastname
             %p= schedule_carwash.date
-            = link_to 'Edit', edit_schedule_carwash_path(schedule_carwash)
-            = link_to 'Destroy', schedule_carwash, method: :delete, data: { confirm: 'Are you sure?' }

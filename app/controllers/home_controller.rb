@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 
   def nextMonth
   	@day=params[:date].to_date
-	@day=@day.to_time.advance(:months=>+1).to_date
+    @day=@day.to_time.advance(:months=>+1).to_date
   	render :index
   end
 

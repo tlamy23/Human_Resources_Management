@@ -118,6 +118,10 @@ class ScheduleCarwashesController < ApplicationController
     redirect_to "/schedule_carwashes#index"
   end
 
+  def CarWashbyday
+    @schedule_carwashes=ScheduleCarwash.where(date: params[:day]).order(:turn)
+    @day=params[:day]
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_schedule_carwash
@@ -127,5 +131,9 @@ class ScheduleCarwashesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_carwash_params
       params.require(:schedule_carwash).permit(:date, :turn, :employee_id)
+    end
+
+    def byday_params
+      params.require(:day)
     end
 end
