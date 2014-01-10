@@ -1,12 +1,4 @@
 = form_for(@schedule_carwash) do |f|
-  - if @schedule_carwash.errors.any?
-    #error_explanation{class: "alert alert-danger"}
-      %h2
-        = pluralize(@schedule_carwash.errors.count, "error")
-        prohibited this schedule_carwash from being saved:
-      %ul
-        - @schedule_carwash.errors.full_messages.each do |msg|
-          %li= msg
   %div{class: "form-group"}
     = f.label :date, :class=> "control-label"
     .control

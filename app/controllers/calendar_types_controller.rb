@@ -29,10 +29,9 @@ class CalendarTypesController < ApplicationController
     respond_to do |format|
       if @calendar_type.save
         format.html { redirect_to @calendar_type, notice: 'Calendar type was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @calendar_type }
       else
+        @errors=@calendar_type.errors
         format.html { render action: 'new' }
-        format.json { render json: @calendar_type.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,10 +43,9 @@ class CalendarTypesController < ApplicationController
     respond_to do |format|
       if @calendar_type.update(calendar_type_params)
         format.html { redirect_to @calendar_type, notice: 'Calendar type was successfully updated.' }
-        format.json { head :no_content }
       else
+        @errors=@calendar_type.errors
         format.html { render action: 'edit' }
-        format.json { render json: @calendar_type.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +56,6 @@ class CalendarTypesController < ApplicationController
     @calendar_type.destroy
     respond_to do |format|
       format.html { redirect_to calendar_types_url }
-      format.json { head :no_content }
     end
   end
 

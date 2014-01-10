@@ -1,12 +1,5 @@
 = form_for(@employee)  do |f|
-  - if @employee.errors.any?
-    #error_explanation.alert.alert-danger
-      %h2
-        = pluralize(@employee.errors.count, "error")
-        prohibited this employee from being saved:
-      %ul
-        - @employee.errors.full_messages.each do |msg|
-          %li= msg
+  
   .form-group
     = f.label "Photo", :class => "control-label"
     %br/

@@ -25,30 +25,23 @@ class DayOffsController < ApplicationController
   # POST /day_offs.json
   def create
     @day_off_tmp = params[:calendar_type_id]
-    if @day_off_tmp!=nil
+    @day_off = DayOff.new(day_off_params)
+    if @day_off_tmp!=nil && @day_off.name !=""
       @day_off_tmp.each do |id|
         @day_off = DayOff.new(day_off_params)
-        @day_off.calendar_type_id = id 
+        @day_off.calendar_type_id = id
         @day_off.save
       end
     else
-        #render :json => { :message => "Select Calendar Type" }
-        @day_off=DayOff.new(day_off_params)
-        @day_off.errors.add :calendar_type_id,'Select Calendar Type'
-        respond_to do |format|
-          format.html { render action: 'new' }
-          format.json { render json: @day_off.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @day_off.save
+            format.html { redirect_to @day_off, notice: 'Day Off was successfully created.' }
+        else
+            @errors=@day_off.errors
+            format.html { render action: 'new' }
         end
+      end
     end
-    #respond_to do |format|
-      #if @day_off.save
-        #format.html { redirect_to @day_off, notice: 'Day off was successfully created.' }
-        #format.json { render action: 'show', status: :created, location: @day_off }
-      #else
-        #format.html { render action: 'new' }
-        #format.json { render json: @day_off.errors, status: :unprocessable_entity }
-      #end
-    #end
   end
 
   # PATCH/PUT /day_offs/1
@@ -57,10 +50,9 @@ class DayOffsController < ApplicationController
     respond_to do |format|
       if @day_off.update(day_off_params)
         format.html { redirect_to @day_off, notice: 'Day off was successfully updated.' }
-        format.json { head :no_content }
       else
+        @day_off.errors
         format.html { render action: 'edit' }
-        format.json { render json: @day_off.errors, status: :unprocessable_entity }
       end
     end
   end

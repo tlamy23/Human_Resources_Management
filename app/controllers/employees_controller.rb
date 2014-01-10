@@ -30,10 +30,9 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.save
         format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @employee }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
+        @errors=@employee.errors
+        format.html { render action: 'new'}
       end
     end
   end
@@ -45,10 +44,9 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.update(employee_params)
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-        format.json { head :no_content }
       else
+        @errors=@employee.errors
         format.html { render action: 'edit' }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
       end
     end
   end
