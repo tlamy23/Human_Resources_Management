@@ -1,7 +1,7 @@
 .page-header
   %h1 Listing Days Offs
-  %small
-    = link_to 'New Day off', new_day_off_path,:class => "btn btn-primary"
+  %h3
+    = @day
 - @day_offs.each do |day_off|
   .col-xs-8.col-md-3
     .thumbnail.btn-default
@@ -12,5 +12,3 @@
           %center
             %h4= link_to day_off.name, day_off, :class => "label label-info"
             %p= day_off.date
-            = link_to 'Edit', edit_day_off_path(day_off)
-            = link_to 'Destroy', day_off, method: :delete, data: { confirm: 'Are you sure?' }

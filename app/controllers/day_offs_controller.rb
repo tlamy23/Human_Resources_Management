@@ -67,6 +67,11 @@ class DayOffsController < ApplicationController
     end
   end
 
+  def DayOffbyday
+    @day_offs=DayOff.where(date: params[:day])
+    @day=params[:day]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_day_off
@@ -76,5 +81,9 @@ class DayOffsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def day_off_params
       params.require(:day_off).permit(:name, :date, :calendar_type_id)
+    end
+
+    def byday_params
+      params.require(:day)
     end
 end

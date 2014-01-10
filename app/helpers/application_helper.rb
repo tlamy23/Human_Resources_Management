@@ -19,6 +19,11 @@ module ApplicationHelper
 		HomeH.new(name,nil,object).day_mediabody_content
 	end
 
+	def day_controller(name)
+		HomeH.new(name).day_controller
+	end
+
+
 	def calendar_days
 		days = []
 		day = {"label"=> "Sun","wknd"=> true,"clas"=> "col-md-1 col-xs-1 thumbnail alert-warning","clas2"=> "col-md-1 col-xs-1 thumbnail alert-warning"}

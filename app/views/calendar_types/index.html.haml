@@ -1,4 +1,7 @@
-%h1 Listing Calendar Types
+.page-header
+  %h1 Listing Calendar Types
+  %small
+    = link_to 'New Calendar type', new_calendar_type_path,:class => "btn btn-primary"
 - @calendar_types.each do |calendar_type|
   .col-xs-8.col-md-3
     .thumbnail.btn-default
@@ -10,6 +13,4 @@
             %h4= link_to calendar_type.name, calendar_type,:class => "label label-info"
             = link_to 'Edit', edit_calendar_type_path(calendar_type)
             = link_to 'Destroy', calendar_type, method: :delete, data: { confirm: 'Are you sure?' }
-.form-group
-  %center
-    = link_to 'New Calendar type', new_calendar_type_path,:class => "btn btn-primary"
+    
