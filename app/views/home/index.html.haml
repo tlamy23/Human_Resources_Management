@@ -1,9 +1,13 @@
 = content_for :scripts do
   = javascript_include_tag "/assets/home.js"
   = stylesheet_link_tag "/assets/home.css"
-- @dayn=calendar_day(@day)
-- @days=calendar_days
+- @dayn = calendar_day(@day)
+- @days = calendar_days
 - @month = @dayn.month
+
+- @cdays = calendar_ndays(@day)
+- @nds= @cdays["start_day"]
+- @nd = @cdays["ndays"]
 
 %input{id: "dateToday",type: "text",name: "dateToday",value: "#{Date.today.year}#{Date.today.month}#{Date.today.day}",style: "display:none"}
 
@@ -21,11 +25,11 @@
     - @days.each do |dn|
       %li{class: dn["clas"]}
         %center
-          = dn["label"]
-    - while @month == @dayn.month
+          = dn["label"]     
+    - while  @nd>0
       - @days.each do|d|
-        %li.thumbnail{id: "li-#{@dayn.year}-#{@dayn.month}-#{@dayn.day}",class: d["clas2"] }
-          - if @dayn.strftime("%a") == d["label"]
-            = render "home/inday", day: @dayn, wknd: d["wknd"]
-            - @dayn += 1
-            - break if @dayn.month != @month
+        - d["clas2"] = calendar_dayclass(@month,@nds.month,d)
+        %li.thumbnail{id: "li-#{@nds.year}-#{@nds.month}-#{@nds.day}",class: d["clas2"] }
+          = render "home/inday", day: @nds, wknd: d["wknd"]
+          - @nds += 1
+          - @nd -= 1
