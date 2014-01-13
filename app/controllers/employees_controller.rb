@@ -75,7 +75,7 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def BirthDatebyday
+  def byday_birthdate
     @employees=Employee.where(birthdate: params[:day])
     @day=params[:day]
   end

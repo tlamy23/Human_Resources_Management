@@ -118,7 +118,7 @@ class ScheduleCarwashesController < ApplicationController
     redirect_to "/schedule_carwashes#index"
   end
 
-  def CarWashbyday
+  def byday_schedule_carwash
     @schedule_carwashes=ScheduleCarwash.where(date: params[:day]).order(:turn)
     @day=params[:day]
   end

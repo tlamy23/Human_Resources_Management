@@ -67,7 +67,7 @@ class DayOffsController < ApplicationController
     end
   end
 
-  def DayOffbyday
+  def byday_day_off
     @day_offs=DayOff.where(date: params[:day])
     @day=params[:day]
   end

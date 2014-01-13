@@ -14,8 +14,12 @@ class HomeController < ApplicationController
   	render :index
   end
 
+  def dashboard_day
+    @date=params[:date].to_date
+  end
   private
   def calendar_params
     params.require(:date)
   end
+
 end

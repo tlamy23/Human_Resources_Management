@@ -53,4 +53,8 @@ class HomeH
 	def day_controller
 		@name == "CarWash" ? 'schedule_carwashes' : @name == "BirthDate" ? 'employees' : @name == "DayOff" ? 'day_offs' : ""
 	end
+
+	def day_action
+		@name == "CarWash" ? 'byday_schedule_carwash' : @name == "BirthDate" ? 'byday_birthdate' : @name == "DayOff" ? 'byday_day_off' : ""
+	end
 end
