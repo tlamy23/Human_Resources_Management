@@ -1,0 +1,15 @@
+.page-header.alert-info
+  %center
+    %ul.list-inline
+      %li
+        %h1= link_to "",{controller: "home", action: "dashboard_day", date: @date-1 },title: "Previous Month",class: "glyphicon glyphicon-chevron-left"
+      %li
+        %h1
+          = @date.strftime("%A")
+        %small
+          %strong
+            ="Year: #{@date.year} Moth: #{@date.month} Day: #{@date.day}"
+      %li
+        %h1= link_to "",{controller: "home", action: "dashboard_day", date: @date+1 },title: "Next Month",class: "glyphicon glyphicon-chevron-right"
+
+= render "byday", date: @date

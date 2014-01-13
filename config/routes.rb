@@ -7,6 +7,7 @@ HumanResourcesManagement::Application.routes.draw do
   get 'byday_birthdate', to: 'employees#byday_birthdate'
   get 'byday_schedule_carwash', to: 'schedule_carwashes#byday_schedule_carwash'
   get 'byday_day_off', to: 'day_offs#byday_day_off'
+  get 'dashboard_day', to: 'home#dashboard_day'
 
   resources :calendar_types
 

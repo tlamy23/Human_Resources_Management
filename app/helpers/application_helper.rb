@@ -27,6 +27,11 @@ module ApplicationHelper
 		HomeH.new(name).day_action
 	end
 
+	def dashbard_day_getlist(name,date)
+		DashboardDayH.new(name,date).dashbard_day_getlist
+	end
+
+
 	def calendar_days
 		days = []
 		day = {"label"=> "Sun","wknd"=> true,"clas"=> "col-md-1 col-xs-1 thumbnail alert-warning","clas2"=> "col-md-1 col-xs-1 thumbnail alert-warning", "id"=> 0}

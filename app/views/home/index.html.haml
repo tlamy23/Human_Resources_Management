@@ -29,7 +29,8 @@
     - while  @nd>0
       - @days.each do|d|
         - d["clas2"] = calendar_dayclass(@month,@nds.month,d)
-        %li.thumbnail{id: "li-#{@nds.year}-#{@nds.month}-#{@nds.day}",class: d["clas2"] }
-          = render "home/inday", day: @nds, wknd: d["wknd"]
-          - @nds += 1
-          - @nd -= 1
+        %a{href: "/dashboard_day?date=#{@nds}"}
+          %li.thumbnail{id: "li-#{@nds.year}-#{@nds.month}-#{@nds.day}",class: d["clas2"] }
+            = render "home/inday", day: @nds, wknd: d["wknd"]
+            - @nds += 1
+            - @nd -= 1
