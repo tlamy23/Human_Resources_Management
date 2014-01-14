@@ -83,14 +83,18 @@ class ScheduleCarwashesController < ApplicationController
   end
 
   def generateSchedule
+    @ePerDay = params[:per_day].to_f
+    date=params[:start_date]
+    @startday = Date.new date["date(1i)"].to_i, date["date(2i)"].to_i, date["date(3i)"].to_i
+    puts("====> #{@ePerDay} #{@startday}")
     @count = (Employee.count.to_s + '.0').to_f 
-    @ePerDay = 5.0
+
     @e = Employee.order(first_lastname: :desc)
     @i = (@count/@ePerDay).ceil
-    @startday = Date.today
+    
     
     while @i > 0
-       @ePerDay = 5.0
+       @ePerDay = params[:per_day].to_f
 
       while @startday.strftime("%a") == "Sat" || @startday.strftime("%a") == "Sun"
 
@@ -115,7 +119,10 @@ class ScheduleCarwashesController < ApplicationController
 
       @startday +=1
     end
-    redirect_to "/schedule_carwashes#index"
+    respond_to do |format|
+      format.html { redirect_to schedule_carwashes_url }
+      format.json { head :no_content }
+    end
   end
 
   def byday_schedule_carwash
@@ -135,5 +142,9 @@ class ScheduleCarwashesController < ApplicationController
 
     def byday_params
       params.require(:day)
+    end
+
+    def generateSchedule_params
+      params.require(:start_date, :per_day)
     end
 end

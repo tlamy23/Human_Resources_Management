@@ -1,17 +1,19 @@
 .col-md-6
 	.modal-content
-		.modal-header
-			%button.close{type: "button",data:{dismiss:"modal"},aria:{hidden: "true"}}="X"
-			.modal-tittle#Generator
-				Schedule CarWash Generate
-		.modal-body
-			.form-group
-				%label.control-label="Start Date:"
-				%br/
-				= date_select :start_date,class: "form-control"
-			.form-group
-				%label.control-label= "Employees Per Day:"
-				= number_field :per_day,nil, options: {min: 1, max: 100, in: 1},class: "form-control"
-		.modal-footer
-			%center
-				= link_to "Generate",{action: "generateSchedule"},class: "btn btn-warning"
+		=form_tag url_for(controller: 'schedule_carwashes',action: 'generateSchedule') do
+			.modal-header
+				%button.close{type: "button",data:{dismiss:"modal"},aria:{hidden: "true"}}="X"
+				.modal-tittle#Generator
+					Schedule CarWash Generate
+			.modal-body
+
+				.form-group
+					%label.control-label="Start Date:"
+					%br/
+					= date_select 'start_date','date'
+				.form-group
+					%label.control-label= "Employees Per Day:"
+					= number_field_tag 'per_day',"1", min: "1", max: "100",class: "form-control"
+			.modal-footer
+				%center
+					= submit_tag 'Generate',class: "btn btn-warning"
