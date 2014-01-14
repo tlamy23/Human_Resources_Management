@@ -2,7 +2,10 @@
   %h1 Listing Schedule CarWas
   %small
     = link_to 'New Schedule carwash', new_schedule_carwash_path,:class => "btn btn-primary"
-    = link_to "Generate",{:action => "generateSchedule"},:class => "btn btn-warning"
+    = link_to "Generate","",class: "btn btn-warning", data:{toggle: "modal",target: "#generator"}
+.modal.fade#generator{tabindex: "-1", role: "dialog", aria: {labelledby: "Generator", hidden: "true"}}
+  .modal-dialog
+    = render "generator"
 - @schedule_carwashes.each do |schedule_carwash|
   .col-xs-8.col-md-4
     .thumbnail.btn-default
