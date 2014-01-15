@@ -83,41 +83,9 @@ class ScheduleCarwashesController < ApplicationController
   end
 
   def generateSchedule
-    @ePerDay = params[:per_day].to_f
     date=params[:start_date]
-    @startday = Date.new date["date(1i)"].to_i, date["date(2i)"].to_i, date["date(3i)"].to_i
-    @count = (Employee.count.to_s + '.0').to_f 
-
-    @e = Employee.order(first_lastname: :desc)
-    @i = (@count/@ePerDay).ceil
-    while @i > 0
-       @ePerDay = params[:per_day].to_f
-      while @startday.strftime("%a") == "Sat" || @startday.strftime("%a") == "Sun"
-        @startday += 1
-      end
-      @j=1
-      while @ePerDay > 0
-        @schedule = ScheduleCarwash.new
-        @schedule.turn = @j
-
-        while @schedule.employee==nil && @count>0
-          find_e= ScheduleCarwash.where(employee:@e[@count-1],date: @startday)
-          if find_e.count==0
-            @schedule.employee = @e[@count-1]
-          else
-            @count -= 1
-          end
-        end
-
-        @schedule.date = @startday
-        @save=@schedule.save
-        @count -= 1
-        @ePerDay -= 1
-        @j += 1
-      end
-      @i -= 1
-      @startday +=1
-    end
+    startday = Date.new date["date(1i)"].to_i, date["date(2i)"].to_i, date["date(3i)"].to_i
+    ScheduleCarwash.generateSchedule(params[:per_day].to_f,startday)
     respond_to do |format|
       format.html { redirect_to schedule_carwashes_url }
       format.json { head :no_content }

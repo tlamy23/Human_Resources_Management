@@ -21,4 +21,39 @@ class ScheduleCarwash < ActiveRecord::Base
 	    end
 	    schedule_carwashes
 	end
+
+	def self.generateSchedule(_ePerDay,_startday)
+		ePerDay=_ePerDay
+		startday=_startday
+	    count = (Employee.count.to_s + '.0').to_f 
+	    e = Employee.order(first_lastname: :desc)
+	    i = (count/ePerDay).ceil
+	    while i > 0
+	       	ePerDay = _ePerDay
+	    	while startday.strftime("%a") == "Sat" || startday.strftime("%a") == "Sun"
+	        	startday += 1
+	      	end
+	      	j=1
+	      	while ePerDay > 0
+	        	schedule = ScheduleCarwash.new
+	        	schedule.turn = j
+		        while schedule.employee==nil && count>0
+		          	find_e= ScheduleCarwash.where(employee:e[count-1],date: startday)
+		          	if find_e.count==0
+		            	schedule.employee = e[count-1]
+		          	else
+		            	count -= 1
+		          	end
+		        end
+		        schedule.date = startday
+		        schedule.save
+		        count -= 1
+		        ePerDay -= 1
+		        j += 1
+	      	end
+	      	i -= 1
+	      	startday +=1
+    	end
+  end
+
 end
