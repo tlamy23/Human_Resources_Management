@@ -83,9 +83,8 @@ class ScheduleCarwashesController < ApplicationController
   end
 
   def generateSchedule
-    date=params[:start_date]
-    startday = Date.new date["date(1i)"].to_i, date["date(2i)"].to_i, date["date(3i)"].to_i
-    ScheduleCarwash.generateSchedule(params[:per_day].to_f,startday)
+    startday = Date.new generateSchedule_params["date(1i)"].to_i, generateSchedule_params["date(2i)"].to_i, generateSchedule_params["date(3i)"].to_i
+    ScheduleCarwash.generateSchedule(generateSchedule_params[:per_day].to_f,startday)
     respond_to do |format|
       format.html { redirect_to schedule_carwashes_url }
       format.json { head :no_content }
@@ -112,6 +111,6 @@ class ScheduleCarwashesController < ApplicationController
     end
 
     def generateSchedule_params
-      params.require(:start_date, :per_day)
+      params.require("vars")
     end
 end

@@ -1,6 +1,6 @@
 .col-md-6
 	.modal-content
-		=form_tag url_for(controller: 'schedule_carwashes',action: 'generateSchedule') do
+		=form_for "vars",url: url_for(controller: 'schedule_carwashes',action: 'generateSchedule') do |f|
 			.modal-header
 				%button.close{type: "button",data:{dismiss:"modal"},aria:{hidden: "true"}}="X"
 				.modal-tittle#Generator
@@ -10,10 +10,10 @@
 				.form-group
 					%label.control-label="Start Date:"
 					%br/
-					= date_select 'start_date','date'
+					= f.date_select :date
 				.form-group
 					%label.control-label= "Employees Per Day:"
-					= number_field_tag 'per_day',"1", min: "1", max: "100",class: "form-control"
+					= f.number_field :per_day,value: 1, min: 1
 			.modal-footer
 				%center
-					= submit_tag 'Generate',class: "btn btn-warning"
+					= f.submit 'Generate',class: "btn btn-warning"
