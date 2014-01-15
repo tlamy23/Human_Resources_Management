@@ -4,7 +4,7 @@ class ScheduleCarwashesController < ApplicationController
   # GET /schedule_carwashes
   # GET /schedule_carwashes.json
   def index
-    @schedule_carwashes = ScheduleCarwash.all.order("date,turn")
+    @schedule_carwashes= ScheduleCarwash.list_schedule
   end
 
   # GET /schedule_carwashes/1

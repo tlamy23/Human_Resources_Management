@@ -10,4 +10,15 @@ class ScheduleCarwash < ActiveRecord::Base
 			self.errors.add :date,'can only be henceforth'
 		end
 	end
+
+	def self.list_schedule
+		dates=ScheduleCarwash.where("date>current_date").group("date(date)")
+    	schedule_carwashes = []
+	    dates.each do |d|
+	      schedule_carwash=ScheduleCarwash.where(date: d.date).order("date,turn")
+	      schedule_carwash_item={"date"=> d.date, "list"=>schedule_carwash}
+	      schedule_carwashes.push(schedule_carwash_item)
+	    end
+	    schedule_carwashes
+	end
 end
