@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @day==nil ? @day = Date.today.beginning_of_month : @day=@day.beginning_of_month
   end
 
   def prevMonth

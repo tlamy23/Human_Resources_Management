@@ -51,21 +51,15 @@ module ApplicationHelper
 		return days
 	end
 	
-	def calendar_day(day)
-  	day=Date.today if day.nil?
-		day= day - day.day
-		day += 1
+	def calendar_ndays(day)
+		day=day.beginning_of_month
+		u=calendar_unless_days(day)
+		g=calendar_grater_days(day)
+		g=g+u
+		sd=day-u
+		days = {"start_day" => sd,"ndays" => g}
+		return days
 	end
-
-  def calendar_ndays(day)
-    day=calendar_day(day)
-    u=calendar_unless_days(day)
-    g=calendar_grater_days(day)
-    g=g+u
-    sd=day-u
-    days = {"start_day" => sd,"ndays" => g}
-    return days
-  end
 
 	def calendar_unless_days(start_day)
 		days=calendar_days

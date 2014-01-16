@@ -1,7 +1,8 @@
 = content_for :scripts do
   = javascript_include_tag "/assets/home.js"
   = stylesheet_link_tag "/assets/home.css"
-- @dayn = calendar_day(@day)
+
+- @dayn=@day
 - @days = calendar_days
 - @month = @dayn.month
 
