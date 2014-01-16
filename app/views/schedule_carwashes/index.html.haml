@@ -2,17 +2,28 @@
   %h1 Listing Schedule CarWas
   %small
     = link_to 'New Schedule carwash', new_schedule_carwash_path,:class => "btn btn-primary"
-    = link_to "Generate",{:action => "generateSchedule"},:class => "btn btn-warning"
-- @schedule_carwashes.each do |schedule_carwash|
-  .col-xs-8.col-md-4
-    .thumbnail.btn-default
-      .media
-        .pull-left
-          = image_tag(schedule_carwash.employee.image,:size=>"100x100")
-        .media-body
-          %center
-            %h4= link_to schedule_carwash.turn, schedule_carwash, :class => "label label-info"
-            %p= schedule_carwash.employee.name + ' ' + schedule_carwash.employee.first_lastname
-            %p= schedule_carwash.date
-            = link_to 'Edit', edit_schedule_carwash_path(schedule_carwash)
-            = link_to 'Destroy', schedule_carwash, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to "Generate","",class: "btn btn-warning", data:{toggle: "modal",target: "#generator"}
+.modal.fade#generator{tabindex: "-1", role: "dialog", aria: {labelledby: "Generator", hidden: "true"}}
+  .modal-dialog
+    = render "generator"
+- @schedule_carwashes.each do |s|
+  .col-xs-8.col-md-3
+    %a{data:{toggle: "collapse"}, href:"#collapse#{s["date"]}"}
+      .page-header
+        %h2
+          =s["date"]
+          %span.badge
+            =s["list"].count.to_s
+    .panel-collapse.collapse{id: "collapse#{s["date"]}"}
+      - s["list"].each do |schedule_carwash|
+        .thumbnail.btn-default
+          .media
+            .pull-left
+              = image_tag(schedule_carwash.employee.image,:size=>"100x100")
+            .media-body
+              %center
+                %h4= link_to schedule_carwash.turn, schedule_carwash, :class => "label label-info"
+                %p= "#{schedule_carwash.employee.name} #{schedule_carwash.employee.first_lastname}"
+                %p= schedule_carwash.date
+                = link_to 'Edit', edit_schedule_carwash_path(schedule_carwash)
+                = link_to 'Destroy', schedule_carwash, method: :delete, data: { confirm: 'Are you sure?' }

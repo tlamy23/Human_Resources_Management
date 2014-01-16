@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready= ->
   date=document.getElementById('dateToday').value
-  $('#td'+date ).css "background-color", "#FFA500"
+  $('#li-'+date ).css "background-color", "#FFA500"
   $('.tt').each ->
     strid='#'+this.id.replace 'target','content'
     $(this).popover

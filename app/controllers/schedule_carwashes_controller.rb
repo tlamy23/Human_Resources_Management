@@ -4,7 +4,7 @@ class ScheduleCarwashesController < ApplicationController
   # GET /schedule_carwashes
   # GET /schedule_carwashes.json
   def index
-    @schedule_carwashes = ScheduleCarwash.all.order("date,turn")
+    @schedule_carwashes= ScheduleCarwash.list_schedule
   end
 
   # GET /schedule_carwashes/1
@@ -83,39 +83,12 @@ class ScheduleCarwashesController < ApplicationController
   end
 
   def generateSchedule
-    @count = (Employee.count.to_s + '.0').to_f 
-    @ePerDay = 5.0
-    @e = Employee.order(first_lastname: :desc)
-    @i = (@count/@ePerDay).ceil
-    @startday = Date.today
-    
-    while @i > 0
-       @ePerDay = 5.0
-
-      while @startday.strftime("%a") == "Sat" || @startday.strftime("%a") == "Sun"
-
-        @startday += 1
-      end
-      @j=1
-      while @ePerDay > 0
-        @schedule = ScheduleCarwash.new
-        @schedule.turn = @j
-        @schedule.employee = @e[@count-1]
-        @schedule.date = @startday
-
-        @save=@schedule.save
-
-        @count -= 1
-
-        @ePerDay -= 1
-
-        @j += 1
-      end
-      @i -= 1
-
-      @startday +=1
+    startday = Date.new generateSchedule_params["date(1i)"].to_i, generateSchedule_params["date(2i)"].to_i, generateSchedule_params["date(3i)"].to_i
+    ScheduleCarwash.generateSchedule(generateSchedule_params[:per_day].to_f,startday)
+    respond_to do |format|
+      format.html { redirect_to schedule_carwashes_url }
+      format.json { head :no_content }
     end
-    redirect_to "/schedule_carwashes#index"
   end
 
   def byday_schedule_carwash
@@ -135,5 +108,9 @@ class ScheduleCarwashesController < ApplicationController
 
     def byday_params
       params.require(:day)
+    end
+
+    def generateSchedule_params
+      params.require("vars")
     end
 end

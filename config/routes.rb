@@ -2,6 +2,7 @@ HumanResourcesManagement::Application.routes.draw do
   get "home/index"
 
   get 'generateSchedule', to: 'schedule_carwashes#generateSchedule'
+  match 'generateSchedule', to: 'schedule_carwashes#generateSchedule',:via =>[:get, :post]
   get 'prevMonth',to:'home#prevMonth'
   get 'nextMonth' ,to:'home#nextMonth'
   get 'byday_birthdate', to: 'employees#byday_birthdate'
