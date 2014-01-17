@@ -1,4 +1,6 @@
 HumanResourcesManagement::Application.routes.draw do
+  resources :projects
+
   resources :teams
 
   get "home/index"
