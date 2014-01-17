@@ -25,35 +25,12 @@ class ScheduleCarwashesController < ApplicationController
   # POST /schedule_carwashes.json
   def create
     @schedule_carwash = ScheduleCarwash.new(schedule_carwash_params)
-    @date=@schedule_carwash.date
-    @day=ScheduleCarwash.where(date:@date).order(:turn)
-    @bndr=false
-    if @day.count<5
-      @i=1
-      while @i<6
-        begin
-          @d=@day.find_by(:turn=>@i)
-        rescue
-          @d=nil
-        end
-        if @d!=nil
-          @i += 1
-        else
-          @schedule_carwash.turn=@i
-          @bndr= @schedule_carwash.save
-          break
-        end
-      end 
-      respond_to do |format|
-        format.html { redirect_to @schedule_carwash, notice: 'Schedule carwash was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @schedule_carwash }
-        @errors=@schedule_carwash.errors
-      end
-    else
-      respond_to do |format|
-        @schedule_carwash.errors.add :date,'the Schedule day selected is complete'
-        format.html { render action: 'new' }
-        @errors=@schedule_carwash.errors
+    respond_to do |format|
+      if @schedule_carwash.save
+        format.html { redirect_to  @schedule_carwash , notice: 'the Schedule day selected is complete' }
+      else
+         @errors=@schedule_carwash.errors
+         format.html { render action: 'new' }
       end
     end
   end
