@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117193217) do
+ActiveRecord::Schema.define(version: 20140117201218) do
 
   create_table "calendar_types", force: true do |t|
     t.string   "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140117193217) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "calendar_type_id"
   end
 
   create_table "schedule_carwashes", force: true do |t|
