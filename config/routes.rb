@@ -1,4 +1,6 @@
 HumanResourcesManagement::Application.routes.draw do
+  resources :teams
+
   get "home/index"
 
   get 'generateSchedule', to: 'schedule_carwashes#generateSchedule'
