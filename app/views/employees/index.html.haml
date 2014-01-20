@@ -10,8 +10,7 @@
           = image_tag(employee.image, :size => "100x100")
         .media-body
           %center
-            %h4= link_to employee.name + " " + employee.first_lastname + " " + employee.second_lastname, employee,:class => "label label-info"
-            %p= image_tag(employee.calendar_type.image,:size => "50x50")
+            %h4= link_to "#{employee.name} #{employee.first_lastname} #{employee.second_lastname}", employee,:class => "label label-info"
             = link_to 'Edit', edit_employee_path(employee)
             = link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' }
     
