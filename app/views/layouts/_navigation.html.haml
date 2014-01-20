@@ -1,5 +1,5 @@
 %ul.nav.nav-pills
-  %li.active
+  %li
     %a.h4{href: root_path}
       %span.glyphicon.glyphicon-home
       Home
@@ -7,6 +7,21 @@
     %a.h4{href: employees_path}
       %span.glyphicon.glyphicon-user
       Employees
+  %li
+    %a.dropdown-toggle{data:{toggle: "dropdown"}}
+      %h4
+        %span.caret
+        %span.sr-only
+    %ul.dropdown-menu{role: "menu"}
+      %li
+        %a{href: teams_path}
+          Teams
+      %li
+        %a{href: projects_path}
+          Projects
+    /%a.h4{href: employees_path}
+    /  %span.glyphicon.glyphicon-user
+    /  Employees
   %li
     %a.h4{href: day_offs_path}
       %span.glyphicon.glyphicon-calendar
