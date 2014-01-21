@@ -11,6 +11,6 @@
         .media-body
           %center
             %h4= link_to day_off.name, day_off, :class => "label label-info"
-            %p= day_off.date
+            %p= day_off.date.strftime("%B-%d")
             = link_to 'Edit', edit_day_off_path(day_off)
             = link_to 'Destroy', day_off, method: :delete, data: { confirm: 'Are you sure?' }

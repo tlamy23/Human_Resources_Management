@@ -76,8 +76,8 @@ class EmployeesController < ApplicationController
   end
 
   def byday_birthdate
-    @employees=Employee.where(birthdate: params[:day])
-    @day=params[:day]
+    @day=params[:day].to_date
+    @employees=Employee.find(:all, :conditions => ["STRFTIME('%m-%d', birthdate) = ?", @day.strftime("%m-%d")])
   end
 
   private

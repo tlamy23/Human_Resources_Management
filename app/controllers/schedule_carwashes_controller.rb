@@ -70,7 +70,7 @@ class ScheduleCarwashesController < ApplicationController
 
   def byday_schedule_carwash
     @schedule_carwashes=ScheduleCarwash.where(date: params[:day]).order(:turn)
-    @day=params[:day]
+    @day=params[:day].to_date
   end
   private
     # Use callbacks to share common setup or constraints between actions.

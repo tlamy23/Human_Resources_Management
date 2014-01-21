@@ -1,6 +1,6 @@
 = content_for :scripts do
   = javascript_include_tag "/assets/home.js"
-  = stylesheet_link_tag "/assets/home.css"
+  = stylesheet_link_tag "/assets/home.css", "data-turbolinks-track" => true
 
 - @dayn=@day
 - @days = calendar_days
