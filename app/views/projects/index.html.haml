@@ -1,19 +1,27 @@
-%h1 Listing projects
+.page-header
+  %h1 Listing projects
+  %small
+    = link_to 'New Project', new_project_path, class: "btn btn-primary"
+- @projects.each do |project|
+  .col-xs-8.col-md-3
+    .thumbnail.btn-default
+      .media
+        .pull-left
+          %span.glyphicon.glyphicon-certificate
+            = project.name
+        .media-body
+          %ul
+            %li
+              %span.glyphicon.glyphicon-user
+                = "#{project.admin.name} #{project.admin.first_lastname}"
+            %li
+              %span.glyphicon.glyphicon-asterisk
+                = project.team.name
+            %li
+              %span.glyphicon.glyphicon-flag
+                = project.calendar_type.name
+            %li
+              = link_to 'Show', project
+              = link_to 'Edit', edit_project_path(project)
+              = link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
-  - @projects.each do |project|
-    %tr
-      %td= project.name
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Project', new_project_path
