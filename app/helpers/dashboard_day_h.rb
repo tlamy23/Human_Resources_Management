@@ -9,10 +9,10 @@ class DashboardDayH
 			@list = ScheduleCarwash.where(date: @date).order(:turn)
 			@title = "Listing Schedule CarWash"
 		elsif @name == "BirthDate"
-			@list = Employee.where(birthdate: @date)
+			@list = Employee.find(:all, :conditions => ["STRFTIME('%m-%d', birthdate) = ?", @date.strftime("%m-%d")])
 			@title = "Listing BirthDates"
 		elsif @name == "DayOff"
-			@list = DayOff.where(date: @date)
+			@list = DayOff.find(:all, :conditions => ["STRFTIME('%m-%d', date) = ?", @date.strftime("%m-%d")])
 			@title = "Listing Days Off"
 		end
 		list={"list"=>@list,"title"=>@title}
