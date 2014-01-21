@@ -22,10 +22,6 @@ HumanResourcesManagement::Application.routes.draw do
 
   resources :employees
 
-  resources :employees do
-    resources :projects
-  end
-
   root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
