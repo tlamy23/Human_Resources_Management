@@ -15,8 +15,8 @@
     %strong Birthdate:
     = @employee.birthdate
   %p
-    %strong Calendar Type:
-    = image_tag(@employee.calendar_type.image,:size => "50x50")
+    %strong Team:
+    = @employee.team.present? ? @employee.team.name : "Don't have a team"
   = link_to 'Edit', edit_employee_path(@employee)
   |
   \#{link_to 'Back', employees_path}
