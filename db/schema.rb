@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140117212752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "calendar_type_id"
-    t.integer  "teams_id"
+    t.integer  "team_id"
     t.integer  "admin"
   end
 

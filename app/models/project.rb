@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
-	belongs_to :team, foreign_key: "teams_id"
-	belongs_to :employees, foreign_key: "admin"
+	belongs_to :team
+	belongs_to :employee, :foreign_key => 'admin'
+	alias_attribute :admin, :employee
+	belongs_to :calendar_type
 end

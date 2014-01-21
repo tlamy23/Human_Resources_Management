@@ -1,6 +1,10 @@
 class AddProjectAdminAndTeamLeaderToProjectsAndTeams < ActiveRecord::Migration
   def change
-  	add_column :projects, :admin, :integer
-  	add_column :teams, :leader, :integer
+  	change_table :projects do |t|
+  		t.integer :admin, references: :employees
+  	end
+  	change_table :teams do |t|
+  		t.integer :leader, references: :employees
+  	end
   end
 end
