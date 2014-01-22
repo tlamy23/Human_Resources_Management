@@ -16,7 +16,7 @@
     = @employee.birthdate
   %p
     %strong Team:
-    = @employee.team.present? ? @employee.team.name : "Don't have a team"
+    = @employee.team.present? ? link_to(@employee.team.name,@employee.team) : "Don't have a team"
   = link_to 'Edit', edit_employee_path(@employee)
   |
   \#{link_to 'Back', employees_path}

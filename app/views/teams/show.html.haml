@@ -2,8 +2,12 @@
 	%p#notice= notice
 
 	%p
-	  %b Name:
-	  = @team.name
+		%b Name:
+		= @team.name
+	%p 
+		%b Leader:
+		%a{href: employee_path(@team.leader)}
+			= "#{@team.leader.name} #{@team.leader.first_lastname}"
 
 	= link_to 'Edit', edit_team_path(@team)
 	\|

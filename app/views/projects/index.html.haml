@@ -8,20 +8,22 @@
       .media
         .pull-left
           %span.glyphicon.glyphicon-certificate
+          %a{href: project_path(project)}
             = project.name
         .media-body
-          %ul
-            %li
-              %span.glyphicon.glyphicon-user
+          %ul.list-group
+            %li.list-group-item
+              = image_tag(project.admin.image, :size => "35x35")
+              %a{href: employee_path(project.admin)}
                 = "#{project.admin.name} #{project.admin.first_lastname}"
-            %li
+            %li.list-group-item
               %span.glyphicon.glyphicon-asterisk
+              %a{href: team_path(project.team)}
                 = project.team.name
-            %li
-              %span.glyphicon.glyphicon-flag
-                = project.calendar_type.name
-            %li
-              = link_to 'Show', project
+            %li.list-group-item
+              = image_tag(project.calendar_type.image, :size => "35x35")
+              = project.calendar_type.name
+            %li.list-group-item
               = link_to 'Edit', edit_project_path(project)
               = link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
