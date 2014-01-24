@@ -24,15 +24,17 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(team_params)
+    team_params[:leader] != "" ? @employee=Employee.find(team_params[:leader]) : @employee = nil
+    @team = Team.new({name: team_params[:name],leader: @employee})
 
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render action: 'show', status: :created, location: @team }
       else
+        @errors= @team.errors
         format.html { render action: 'new' }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.json { render json: @errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,13 +42,15 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
+    team_params[:leader] != "" ? @employee=Employee.find(team_params[:leader]) : @employee = nil
     respond_to do |format|
-      if @team.update(team_params)
+      if @team.update({name: team_params[:name],leader: @employee})
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { head :no_content }
       else
+        @errors= @team.errors
         format.html { render action: 'edit' }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.json { render json: @errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,6 +73,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name,:leader)
+      params.require(:team).permit(:name, :leader)
     end
 end

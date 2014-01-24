@@ -4,6 +4,6 @@
     = f.text_field :name, class: "form-control"
   .form-group
     = f.label :leader, class: "control-label"
-    = f.select :leader, Employee.all.collect{|e|["#{e.name} #{e.first_lastname}",e.id]},{:include_blank => true},{:class => "form-control"}
+    = f.select :leader, Employee.all.collect{|e|["#{e.name} #{e.first_lastname}",e.id]},{:include_blank=> true},{:class => "form-control"}
   .form-group
     = f.submit 'Save', class: "btn btn-primary"
