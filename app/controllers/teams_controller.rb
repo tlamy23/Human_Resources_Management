@@ -24,9 +24,7 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    team_params[:leader] != "" ? @employee=Employee.find(team_params[:leader]) : @employee = nil
-    @team = Team.new({name: team_params[:name],leader: @employee})
-
+    @team = Team.new(team_params)
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
@@ -42,9 +40,8 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-    team_params[:leader] != "" ? @employee=Employee.find(team_params[:leader]) : @employee = nil
     respond_to do |format|
-      if @team.update({name: team_params[:name],leader: @employee})
+      if @team.update(team_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { head :no_content }
       else
@@ -73,6 +70,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :leader)
+      params.require(:team).permit(:name, :leader_id)
     end
 end
