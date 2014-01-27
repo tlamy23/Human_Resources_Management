@@ -18,8 +18,9 @@
                 = "#{project.admin.name} #{project.admin.first_lastname}"
             %li.list-group-item
               %span.glyphicon.glyphicon-asterisk
-              %a{href: team_path(project.team)}
-                = project.team.name
+              - if project.team.present?
+                %a{href: team_path(project.team)}
+                  = project.team.name
             %li.list-group-item
               = image_tag(project.calendar_type.image, :size => "35x35")
               = project.calendar_type.name

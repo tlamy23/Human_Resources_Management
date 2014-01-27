@@ -3,8 +3,8 @@
     = f.label :name, class: "control-label"
     = f.text_field :name, class: "form-control"
   .form-group
-    = f.label :admin, class: "control-label"
-    = f.select :admin,Employee.all.collect{|e|["#{e.name} #{e.first_lastname}",e.id]}, {:include_blank => true},{:class => "form-control"}
+    = f.label :admin_id, class: "control-label"
+    = f.select :admin_id,Employee.all.collect{|e|["#{e.name} #{e.first_lastname}",e.id]}, {:include_blank => true},{:class => "form-control"}
   .form-group
     = f.label :team, class: "control-label"
     = f.select :team_id, Team.all.collect{|t|[t.name,t.id]}, {:include_blank => true}, {:class => "form-control"}

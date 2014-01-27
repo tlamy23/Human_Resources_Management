@@ -4,6 +4,32 @@
 	%p
 		%b Name:
 		= @project.name
+	%p
+		%b Admin:
+		%a{href: employee_path(@project.admin)}
+			= "#{@project.admin.name} #{@project.admin.first_lastname}"
+	- if @project.team.present?
+		%p
+			%b Team:
+			%a{href: team_path(@project.team)}
+				= @project.team.name
+		%p
+			%b Leader:
+			%a{href: employee_path(@project.team.leader)}
+				= "#{@project.team.leader.name} #{@project.team.leader.first_lastname}"
+		%p
+			%b Members:
+			- @project.team != nil ? @employees=get_teamemployees(@project.team) : @employees = nil
+			- if @employees.present?
+				%ul
+					- @employees.each do |e|
+						%li.list-group-item
+							= image_tag(e.image, :size => "35x35")
+							%a{href: employee_path(e)}
+								= "#{e.name} #{e.first_lastname}"
+	%p
+		%b Calendar Type
+		= image_tag(@project.calendar_type.image, :size => "35x35")
 
 	= link_to 'Edit', edit_project_path(@project)
 	\|
