@@ -1,0 +1,27 @@
+= content_for :scripts do
+  = javascript_include_tag "/assets/teams.js"
+
+
+.col-md-8
+  .row#teams
+    = render 'teams_content'
+  .row#projects
+    = render 'projects_content'
+
+    
+.col-md-4
+  .page-header
+    Employees
+  - @employees.each do |e|
+    .btn.btn-warning
+      = e.name
+  .page-header
+    Admins
+  - @admins.each do |a|
+    .btn.btn-success
+      = a.name   
+  .page-header
+    Leaders
+  - @leaders.each do |l|
+    .btn.btn-success
+      = l.name   

@@ -61,6 +61,12 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def projects_content
+    @project = Project.find_by_id(params["id"])
+    @employees = Employee.where(team: @project.team)
+    render :json => { :view => render_to_string( :projects_content, :layout => false ) }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

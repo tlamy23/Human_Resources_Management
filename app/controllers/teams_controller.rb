@@ -62,6 +62,20 @@ class TeamsController < ApplicationController
     end
   end
 
+  def manage_team
+    @teams=Team.all
+    @projects= Project.all 
+    @employees = Employee.unassigned
+    @admins = Employee.alljoins.where("projects.admin_id is not null")
+    @leaders = Employee.alljoins.where("teams.leader_id is not null")
+  end
+
+  def teams_content
+    @employees = Employee.where(team_id: params["id"])
+    @team = Team.find_by_id(params["id"])
+    render :json => { :view => render_to_string( :teams_content, :layout => false ) }
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team

@@ -1,0 +1,12 @@
+.col-md-4.panel
+  .page-header
+    %a{href: url_for(projects_path)}Projects
+    %small= "[#{@projects.count}]"
+  - @projects.each do |p|
+    .projects
+      %a.thubnail.btn.btn-primary.projects{id: "#{p.id}"}= p.name
+.col-md-8.panel
+  .page-header
+    Project Name:
+    %b.btn.btn-primary#project_head
+  #project_content

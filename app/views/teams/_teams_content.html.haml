@@ -1,0 +1,12 @@
+.col-md-4.panel
+  .page-header
+    %a{href: url_for(teams_path)}Teams
+    %small= "[#{@teams.count}]"
+  - @teams.each do |t|
+    .teams
+      %a.thubnail.btn.btn-info.teams{id: "#{t.id}"}= t.name
+.col-md-8.panel
+  .page-header
+    Team Name:
+    %b.btn.btn-info#team_head
+  #team_employees

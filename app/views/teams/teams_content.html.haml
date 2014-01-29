@@ -1,0 +1,9 @@
+.row
+	%b Leader:
+	.btn.btn-success
+		= @team.leader.name
+.row
+	%b Collabolators:
+	- @employees.each do |e|
+		.btn.btn-success
+			= "#{e.name} #{e.first_lastname}"
