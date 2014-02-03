@@ -19,6 +19,7 @@ HumanResourcesManagement::Application.routes.draw do
   get 'dashboard_day', to: 'home#dashboard_day'
   get 'manage_team', to: 'teams#manage_team'
   get 'add_remove_team', to: 'employees#add_remove_team'
+  get 'teams_edit/:id', to: 'teams#teams_edit'
 
   resources :calendar_types
 

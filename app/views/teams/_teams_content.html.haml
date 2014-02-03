@@ -6,10 +6,17 @@
   - @teams.each do |t|
     %p.teams
       %a.thubnail.btn.btn-info.teams{id: "#{t.id}"}= t.name
-      %a.btn.btn-xs{href: url_for(edit_team_path(t))} Edit
-      %a.btn.btn-xs Remove
+      /%a.btn.btn-xs{href: url_for(edit_team_path(t))} Edit
+      %a.lnk-team-edit.btn.btn-xs{id: t.id,data:{toggle: "modal",target: "#team_edit"}} Edit
+      %a.lnk-team-remove.btn.btn-xs{id: t.id} Remove
 .col-md-8.panel
   .page-header
     Team Name:
     %b.btn.btn-info#team_head
-  #team_employees
+  .team_employees
+
+.modal.fade#team_edit{tabindex: "-1", role: "dialog", aria: {labelledby: "team_edit", hidden: "true"}}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .team_edit

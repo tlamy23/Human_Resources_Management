@@ -2,16 +2,31 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
+	$('.lnk-team-edit.btn.btn-xs').hide()
+	$('.lnk-team-remove.btn.btn-xs').hide()
+	
 	$('.thubnail.btn.btn-info.teams').click ->
-		$('#team_head').text(this.text)
 		id = this.id
+		$('#team_head').text(this.text)
+		$('.lnk-team-edit.btn.btn-xs').hide()
+		$('.lnk-team-remove.btn.btn-xs').hide()
+		$("##{id}.lnk-team-edit.btn.btn-xs").show()
+		$("##{id}.lnk-team-remove.btn.btn-xs").show()
 		$.ajax
 			type:'GET'
 			url: "/teams/#{id}/teams_content"
 			success: (data) ->
-				$("#team_employees").html( data.view )
+				$(".team_employees").html( data.view )
 			error: (xhr) ->
 				errors = $.parseJSON( xhr.responseText ).errors
+		$.ajax
+			type:'GET'
+			url: "/teams_edit/#{id}"
+			success: (data) ->
+				$(".team_edit").html( data.view )
+			error: (xhr) ->
+				errors = $.parseJSON( xhr.responseText ).errors
+
 	$('.thubnail.btn.btn-primary.projects').click ->
 		id = this.id
 		$('#project_head').text(this.text)
@@ -24,7 +39,7 @@ $(document).ready ->
 				errors = $.parseJSON( xhr.responseText ).errors
 
 
-	$(document).on "click","#team_employees .btn.btn-success", ->
+	$(document).on "click",".team_employees .btn.btn-success", ->
 		id = this.id
 		team_id= "null"
 		object = this

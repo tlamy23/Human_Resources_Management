@@ -77,6 +77,11 @@ class TeamsController < ApplicationController
     render :json => { :view => render_to_string( :teams_content, :layout => false ) }
   end
   
+  def teams_edit
+    @team = Team.find(params["id"])
+    render :json => { :view => render_to_string( action: 'edit', :layout => false ) }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
