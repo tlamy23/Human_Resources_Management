@@ -80,6 +80,23 @@ class EmployeesController < ApplicationController
     @employees=Employee.find(:all, :conditions => ["STRFTIME('%m-%d', birthdate) = ?", @day.strftime("%m-%d")])
   end
 
+  def add_remove_team
+    @employee = Employee.find_by_id(params["id"])
+    if params["team_id"]!= "null"
+      team_id=params["team_id"]
+    else
+      team_id=nil
+    end
+    respond_to do |format|
+      if @employee.update(team_id: team_id)
+        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
+      else
+        @errors=@employee.errors
+        format.html { render action: '/manage_team' }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee

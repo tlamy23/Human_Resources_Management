@@ -18,6 +18,7 @@ HumanResourcesManagement::Application.routes.draw do
   get 'byday_day_off', to: 'day_offs#byday_day_off'
   get 'dashboard_day', to: 'home#dashboard_day'
   get 'manage_team', to: 'teams#manage_team'
+  get 'add_remove_team', to: 'employees#add_remove_team'
 
   resources :calendar_types
 

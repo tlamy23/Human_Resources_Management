@@ -5,5 +5,5 @@ class Project < ActiveRecord::Base
 	belongs_to :calendar_type
 	validate :name,:calendar_type_id,:admin, presence:true
 
-	scope :unassigned, joins(:teams)
+	scope :unassigned ,joins(:team)
 end

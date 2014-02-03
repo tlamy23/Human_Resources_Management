@@ -1,18 +1,22 @@
 .row
-	%b Admin:
-	.btn.btn-success
-		= "#{@project.admin.name} #{@project.admin.first_lastname}"
+	%p
+		%b Admin:
+		.btn.btn-success
+			= "#{@project.admin.name} #{@project.admin.first_lastname}"
 - if @project.team.present?
 	.row
-		%b Team:
-		.btn.btn-info
-			= @project.team.name
+		%p
+			%b Team:
+			.btn.btn-info
+				= @project.team.name
 	.row
-		%b Leader:
-		.btn.btn-success
-			= "#{@project.team.leader.name} #{@project.team.leader.first_lastname}"
-	.row
-		%b Collaborators
-		- @employees.each do |e|
+		%p
+			%b Leader:
 			.btn.btn-success
-				= "#{e.name} #{e.first_lastname}"
+				= "#{@project.team.leader.name} #{@project.team.leader.first_lastname}"
+	.row
+		%p	
+			%b Collaborators:
+			- @employees.each do |e|
+				.btn.btn-success
+					= "#{e.name} #{e.first_lastname}"

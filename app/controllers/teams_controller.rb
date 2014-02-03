@@ -68,6 +68,7 @@ class TeamsController < ApplicationController
     @employees = Employee.unassigned
     @admins = Employee.alljoins.where("projects.admin_id is not null")
     @leaders = Employee.alljoins.where("teams.leader_id is not null")
+    @teams_unassigned = Team.unassigned
   end
 
   def teams_content
