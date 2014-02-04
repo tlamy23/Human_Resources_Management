@@ -85,6 +85,9 @@ class TeamsController < ApplicationController
   def update_team
     @team = Team.find_by_id(params[:id])
     @team.update(team_params)
+    respond_to do |format|
+      format.html { redirect_to '/manage_team', notice: 'Team was successfully updated.' }
+    end
   end
 
   private
