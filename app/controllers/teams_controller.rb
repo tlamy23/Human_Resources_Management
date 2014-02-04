@@ -79,7 +79,12 @@ class TeamsController < ApplicationController
   
   def teams_edit
     @team = Team.find(params["id"])
-    render :json => { :view => render_to_string( action: 'edit', :layout => false ) }
+    render :json => { :view => render_to_string( 'team_edit', :layout => false ) }
+  end
+
+  def update_team
+    @team = Team.find_by_id(params[:id])
+    @team.update(team_params)
   end
 
   private

@@ -4,7 +4,7 @@
 $(document).ready ->
 	$('.lnk-team-edit.btn.btn-xs').hide()
 	$('.lnk-team-remove.btn.btn-xs').hide()
-	
+
 	$('.thubnail.btn.btn-info.teams').click ->
 		id = this.id
 		$('#team_head').text(this.text)
@@ -39,7 +39,7 @@ $(document).ready ->
 				errors = $.parseJSON( xhr.responseText ).errors
 
 
-	$(document).on "click",".team_employees .btn.btn-success", ->
+	$(document).on "click",".team_employees .btn.btn-success.collabolator", ->
 		id = this.id
 		team_id= "null"
 		object = this
