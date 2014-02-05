@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :teams_edit]
 
   # GET /teams
   # GET /teams.json
@@ -78,7 +78,6 @@ class TeamsController < ApplicationController
   end
   
   def teams_edit
-    @team = Team.find(params["id"])
     render :json => { :view => render_to_string( 'team_edit', :layout => false ) }
   end
 
@@ -89,6 +88,23 @@ class TeamsController < ApplicationController
       format.html { redirect_to '/manage_team', notice: 'Team was successfully updated.' }
     end
   end
+
+   def teams_new
+    @team = Team.new
+    render :json => { :view => render_to_string( 'team_new', :layout => false ) }
+   end
+
+   def create_team
+    @team = Team.new(team_params)
+    respond_to do |format|
+      if @team.save
+        format.html { redirect_to '/manage_team', notice: 'Team was successfully created.' }
+      else
+        @errors= @team.errors
+        format.html { render '/manage_team' }
+      end
+    end
+   end
 
   private
     # Use callbacks to share common setup or constraints between actions.

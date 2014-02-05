@@ -4,6 +4,13 @@
 $(document).ready ->
 	$('.lnk-team-edit.btn.btn-xs').hide()
 	$('.lnk-team-remove.btn.btn-xs').hide()
+	$.ajax
+			type:'GET'
+			url: "/teams_new"
+			success: (data) ->
+				$(".team_new").html( data.view )
+			error: (xhr) ->
+				errors = $.parseJSON( xhr.responseText ).errors
 
 	$('.thubnail.btn.btn-info.teams').click ->
 		id = this.id

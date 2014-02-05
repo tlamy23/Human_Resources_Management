@@ -22,6 +22,9 @@ HumanResourcesManagement::Application.routes.draw do
   get 'teams_edit/:id', to: 'teams#teams_edit'
   get 'update_team', to: 'teams#update_team'
   patch 'update_team/:id' => 'teams#update_team'
+  get 'teams_new', to: 'teams#teams_new'
+  get 'create_team', to: 'teams#create_team'
+  post 'create_team' => 'teams#create_team'
 
   resources :calendar_types
 

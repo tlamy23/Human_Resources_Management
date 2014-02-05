@@ -1,0 +1,11 @@
+%h1 New team
+
+= form_for @team,url: url_for(action: 'create_team', controller: 'teams') do |f|
+	.form-group
+		= f.label :name, class: "control-label"
+		= f.text_field :name, class: "form-control"
+	.form-group
+		= f.label :leader_id, class: "control-label"
+		= f.select :leader_id, Employee.all.collect{|e|["#{e.name} #{e.first_lastname}",e.id]},{:include_blank=> true},{:class => "form-control"}
+	.form-group
+		= f.submit 'Save', class: "btn btn-primary"
