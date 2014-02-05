@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project.team != nil ? @employees=get_teamemployees(@project.team) : @employees = nil
   end
 
   # GET /projects/new
@@ -66,6 +67,8 @@ class ProjectsController < ApplicationController
     @employees = Employee.where(team: @project.team)
     render :json => { :view => render_to_string( :projects_content, :layout => false ) }
   end
+
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

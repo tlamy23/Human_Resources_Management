@@ -1,13 +1,13 @@
 .row
-	.team_id{id: @team.id}
-	%p
-		%b Leader:
-		.btn.btn-success.leader
-			= "#{@team.leader.name} #{@team.leader.first_lastname}"
+  .team_id{id: @team.id}
+  %p
+    %b Leader:
+    .btn.btn-success.leader
+      = "#{@team.leader.name} #{@team.leader.first_lastname}"
 .row
-	%p
-		%b Collabolators:
-		.collabolators
-			- @employees.each do |e|
-				.btn.btn-success.collabolator{id: e.id, name: "employee[id]"}
-					= "#{e.name} #{e.first_lastname}"					
+  %p
+    %b Collabolators:
+    .collabolators
+      - @employees.each do |e|
+        .btn.btn-success.collabolator{id: e.id, name: "employee[id]"}
+          = "#{e.name} #{e.first_lastname}"         

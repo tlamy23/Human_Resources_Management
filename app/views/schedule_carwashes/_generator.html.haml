@@ -1,19 +1,19 @@
 .col-md-6
-	.modal-content
-		=form_for "vars",url: url_for(controller: 'schedule_carwashes',action: 'generateSchedule') do |f|
-			.modal-header
-				%button.close{type: "button",data:{dismiss:"modal"},aria:{hidden: "true"}}="X"
-				.modal-tittle#Generator
-					Schedule CarWash Generate
-			.modal-body
+  .modal-content
+    =form_for "vars",url: url_for(controller: 'schedule_carwashes',action: 'generateSchedule') do |f|
+      .modal-header
+        %button.close{type: "button",data:{dismiss:"modal"},aria:{hidden: "true"}}="X"
+        .modal-tittle#Generator
+          Schedule CarWash Generate
+      .modal-body
 
-				.form-group
-					%label.control-label="Start Date:"
-					%br/
-					= f.date_select :date
-				.form-group
-					%label.control-label= "Employees Per Day:"
-					= f.number_field :per_day,value: 1, min: 1
-			.modal-footer
-				%center
-					= f.submit 'Generate',class: "btn btn-warning"
+        .form-group
+          %label.control-label="Start Date:"
+          %br/
+          = f.date_select :date
+        .form-group
+          %label.control-label= "Employees Per Day:"
+          = f.number_field :per_day,value: 1, min: 1
+      .modal-footer
+        %center
+          = f.submit 'Generate',class: "btn btn-warning"
