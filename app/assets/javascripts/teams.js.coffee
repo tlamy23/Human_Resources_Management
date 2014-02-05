@@ -9,8 +9,6 @@ $(document).ready ->
 			url: "/teams_new"
 			success: (data) ->
 				$(".team_new").html( data.view )
-			error: (xhr) ->
-				errors = $.parseJSON( xhr.responseText ).errors
 
 	$('.thubnail.btn.btn-info.teams').click ->
 		id = this.id
@@ -24,15 +22,11 @@ $(document).ready ->
 			url: "/teams/#{id}/teams_content"
 			success: (data) ->
 				$(".team_employees").html( data.view )
-			error: (xhr) ->
-				errors = $.parseJSON( xhr.responseText ).errors
 		$.ajax
 			type:'GET'
 			url: "/teams_edit/#{id}"
 			success: (data) ->
 				$(".team_edit").html( data.view )
-			error: (xhr) ->
-				errors = $.parseJSON( xhr.responseText ).errors
 
 	$('.thubnail.btn.btn-primary.projects').click ->
 		id = this.id
@@ -42,8 +36,6 @@ $(document).ready ->
 			url: "/projects/#{id}/projects_content"
 			success: (data) ->
 				$("#project_content").html( data.view )
-			error: (xhr) ->
-				errors = $.parseJSON( xhr.responseText ).errors
 
 
 	$(document).on "click",".team_employees .btn.btn-success.collabolator", ->
@@ -56,8 +48,6 @@ $(document).ready ->
 			success: ->
 				$(object).attr("class","btn btn-warning")
 				$('.employees-unassigned').append($(object))
-			error: (xhr) ->
-				errors = $.parseJSON( xhr.responseText ).errors
 
 	$(document).on "click",".employees-unassigned .btn.btn-warning", ->
 		id = this.id
@@ -69,5 +59,3 @@ $(document).ready ->
 			success: ->
 				$(object).attr("class","btn btn-success")
 				$('.collabolators').append($(object))
-			error: (xhr) ->
-				errors = $.parseJSON( xhr.responseText ).errors
