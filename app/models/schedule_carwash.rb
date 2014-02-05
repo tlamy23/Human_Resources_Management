@@ -5,6 +5,8 @@ class ScheduleCarwash < ActiveRecord::Base
 	validate :compare_date, on: :create
 	validates :employee, uniqueness: { scope: :date, message: "can only happen once a day per employee" }, if: "employee.present?"
 
+	scope :by_date, lambda{|date|{:conditions => {:date => date}, :order => :turn}}
+
 	def compare_date
 		if self.date < Date.today
 			self.errors.add :date,'can only be henceforth'
