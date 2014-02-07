@@ -104,6 +104,7 @@ class EmployeesController < ApplicationController
 
    def create_employee
     @employee = Employee.new(employee_params)
+    upload
     respond_to do |format|
       if @employee.save
         format.html { redirect_to '/manage_team', notice: 'Employee was successfully created.' }
