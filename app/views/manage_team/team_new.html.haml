@@ -1,6 +1,6 @@
 %h1 New team
 
-= form_for @team,url: url_for(action: 'create_team', controller: 'teams') do |f|
+= form_for @team,url: url_for(action: 'create_team', controller: 'manage_team') do |f|
   .form-group
     = f.label :name, class: "control-label"
     = f.text_field :name, class: "form-control"

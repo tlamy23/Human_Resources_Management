@@ -2,7 +2,7 @@
   .page-header
     %a{href: url_for(teams_path)} Teams
     %small= "[#{@teams.count}]"
-    %a.lnk-team-index.btn.btn-xs{data:{toggle: "modal",target: "#team_new"}} New Team
+    %a.lnk-team-new.btn.btn-xs{data:{toggle: "modal",target: "#team_new"}} New Team
   - @teams.each do |t|
     %p.teams
       %a.thubnail.btn.btn-info.teams{id: "#{t.id}"}= t.name

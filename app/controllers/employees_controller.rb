@@ -97,6 +97,23 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def employees_new
+    @employee = Employee.new
+    render :json => { :view => render_to_string( 'employee_new', :layout => false ) }
+   end
+
+   def create_employee
+    @employee = Employee.new(employee_params)
+    respond_to do |format|
+      if @employee.save
+        format.html { redirect_to '/manage_team', notice: 'Employee was successfully created.' }
+      else
+        @errors= @team.errors
+        format.html { render '/manage_team' }
+      end
+    end
+   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee

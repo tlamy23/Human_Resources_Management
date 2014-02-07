@@ -4,7 +4,7 @@ class Employee < ActiveRecord::Base
 
   scope :alljoins ,joins: "left join projects on projects.admin_id==employees.id left join teams on teams.leader_id==employees.id"
 
-  scope :unassigned ,alljoins.where("employees.team_id is null and projects.admin_id is null and teams.leader_id is null")
+  scope :unassigned, alljoins.where("employees.team_id is null and projects.admin_id is null and teams.leader_id is null")
   scope :admins, alljoins.where("projects.admin_id is not null")
   scope :leaders, alljoins.where("teams.leader_id is not null")
 end
