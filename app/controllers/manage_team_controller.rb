@@ -29,6 +29,7 @@ class ManageTeamController < ApplicationController
   def update_team
     @team.update(team_params)
     respond_to do |format|
+      flash[:notice] = "Team was updated"
       format.html { redirect_to :action=>'index', :params => {:team_s => @team} }
     end
   end
