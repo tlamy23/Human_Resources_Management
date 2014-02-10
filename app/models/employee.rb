@@ -7,6 +7,10 @@ class Employee < ActiveRecord::Base
   def self.unassigned
   	alljoins.where("employees.team_id is null and projects.admin_id is null and teams.leader_id is null")
   end
-  scope :admins, alljoins.where("projects.admin_id is not null")
-  scope :leaders, alljoins.where("teams.leader_id is not null")
+  def self.admins
+  	alljoins.where("projects.admin_id is not null")
+  end
+  def self.leaders
+  	alljoins.where("teams.leader_id is not null")
+  end
 end

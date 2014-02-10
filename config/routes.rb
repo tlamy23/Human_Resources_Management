@@ -38,6 +38,7 @@ HumanResourcesManagement::Application.routes.draw do
   get 'employees_new', to: 'employees#employees_new'
   get 'create_employee', to: 'employees#create_employee'
   post 'create_employee' => 'employees#create_employee'
+  get 'destroy/:id', to: 'manage_team#destroy'
 
   
 

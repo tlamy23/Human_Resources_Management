@@ -7,7 +7,7 @@
     %p.teams
       %a.thubnail.btn.btn-info.teams{id: "#{t.id}"}= t.name
       %a.lnk-team-edit.btn.btn-xs{id: t.id,data:{toggle: "modal",target: "#team_edit"}} Edit
-      %a.lnk-team-remove.btn.btn-xs{id: t.id} Remove
+      %a.lnk-team-remove.btn.btn-xs{:href=> "destroy/#{t.id}",data:{:confirm => 'Are you sure?'},id: t.id } Remove
 .col-md-8.panel
   .page-header
     Team Name:

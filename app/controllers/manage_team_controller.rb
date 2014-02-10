@@ -1,15 +1,12 @@
 class ManageTeamController < ApplicationController
-  before_action :set_team, only: [:teams_edit,:update_team]
+  before_action :set_team, only: [:teams_edit,:update_team,:destroy]
 
   def index
   	@teams=Team.all
     @projects= Project.all 
     @employees = Employee.unassigned
-    puts("=======#{@employees.count}")
     @admins = Employee.admins
-    puts("=======#{@admins.count}")
     @leaders = Employee.leaders
-    puts("=======#{@leaders.count}")
     @teams_unassigned = Team.unassigned
     @team_s = Team.find_by_id(params[:team_s]) if params[:team_s].present?
     if @team_s.present?
@@ -52,6 +49,13 @@ class ManageTeamController < ApplicationController
       end
     end
    end
+
+   def destroy
+    @team.destroy
+    respond_to do |format|
+      format.html { redirect_to '/manage_team', notice: 'Team was removed.' }
+    end
+  end
 
   private
       # Use callbacks to share common setup or constraints between actions.
