@@ -1,13 +1,22 @@
 class ManageTeamController < ApplicationController
-  before_action :set_team, only: [:teams_edit]
+  before_action :set_team, only: [:teams_edit,:update_team]
 
   def index
   	@teams=Team.all
     @projects= Project.all 
     @employees = Employee.unassigned
+    puts("=======#{@employees.count}")
     @admins = Employee.admins
+    puts("=======#{@admins.count}")
     @leaders = Employee.leaders
+    puts("=======#{@leaders.count}")
     @teams_unassigned = Team.unassigned
+    @team_s = Team.find_by_id(params[:team_s]) if params[:team_s].present?
+    if @team_s.present?
+      @hml=Haml::Engine.new(".team-selected{name: '#{@team_s.name}',id: '#{@team_s.id}'}")
+    else
+      @hml=Haml::Engine.new(".team-selected{name: '',id: ''}")
+    end
   end
 
   def teams_content
@@ -21,10 +30,9 @@ class ManageTeamController < ApplicationController
   end
 
   def update_team
-    @team = Team.find_by_id(params[:id])
     @team.update(team_params)
     respond_to do |format|
-      format.html { redirect_to '/manage_team', notice: 'Team was successfully updated.' }
+      format.html { redirect_to :action=>'index', :params => {:team_s => @team} }
     end
   end
 

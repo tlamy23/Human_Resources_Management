@@ -2,6 +2,9 @@
   = javascript_include_tag "/assets/manage_team.js"
   = stylesheet_link_tag "/assets/manage_team.css", "data-turbolinks-track" => true
 
+= @hml.render 
+
+.project-selected{}
 .col-md-8
   .row#teams
     = render 'teams_content'
