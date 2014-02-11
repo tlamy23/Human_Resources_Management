@@ -92,7 +92,7 @@ class EmployeesController < ApplicationController
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
       else
         @errors=@employee.errors
-        format.html { render action: '/manage_team' }
+        format.html { redirect_to '/manage_team' }
       end
     end
   end
@@ -109,8 +109,9 @@ class EmployeesController < ApplicationController
       if @employee.save
         format.html { redirect_to '/manage_team', notice: 'Employee was successfully created.' }
       else
-        @errors= @team.errors
-        format.html { render '/manage_team' }
+        @errors= @employee.errors
+        flash[:error] = @errors.full_messages.join(', ')
+        format.html { redirect_to '/manage_team' }
       end
     end
    end

@@ -29,7 +29,7 @@ class ManageTeamController < ApplicationController
   def update_team
     @team.update(team_params)
     respond_to do |format|
-      flash[:notice] = "Team was updated"
+      flash[:notice] = "Team was successfully updated"
       format.html { redirect_to :action=>'index', :params => {:team_s => @team} }
     end
   end
@@ -46,7 +46,8 @@ class ManageTeamController < ApplicationController
         format.html { redirect_to '/manage_team', notice: 'Team was successfully created.' }
       else
         @errors= @team.errors
-        format.html { redirect_to '/manage_team', json: @errors, status: :unprocessable_entity}
+        flash[:error] = @errors.full_messages.join(', ')
+        format.html { redirect_to '/manage_team' }
       end
     end
    end

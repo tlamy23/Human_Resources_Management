@@ -1,6 +1,7 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    = content_tag :div, msg, :class => "flash_#{name}"
+    .alert.alert-warning
+      = content_tag :div, msg, :class => "h3 flash_#{name}"
 
 - if @errors.present? && @errors.any?
   #error_explanation.alert.alert-danger
