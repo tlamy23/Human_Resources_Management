@@ -27,10 +27,15 @@ class ManageTeamController < ApplicationController
   end
 
   def update_team
-    @team.update(team_params)
     respond_to do |format|
-      flash[:notice] = "Team was successfully updated"
-      format.html { redirect_to :action=>'index', :params => {:team_s => @team} }
+      if @team.update(team_params)
+        flash[:notice] = "Team was successfully updated"
+        format.html { redirect_to :action=>'index', :params => {:team_s => @team} }
+      else
+        @errors= @team.errors
+        flash[:error] = @errors.full_messages.join(', ')
+        format.html { redirect_to '/manage_team' }
+      end
     end
   end
 
