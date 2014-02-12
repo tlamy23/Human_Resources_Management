@@ -14,13 +14,5 @@
     %b.btn.btn-primary#project_head
   #project_content
 
-.modal.fade#project_new{tabindex: "-1", role: "dialog", aria: {labelledby: "project_new", hidden: "true"}}
-  .modal-dialog
-    .modal-content
-      .modal-body
-        .project_new
-.modal.fade#project_edit{tabindex: "-1", role: "dialog", aria: {labelledby: "project_edit", hidden: "true"}}
-  .modal-dialog
-    .modal-content
-      .modal-body
-        .project_edit
+= render 'modals_manageteam',name: 'project_new'
+= render 'modals_manageteam',name: 'project_edit'
