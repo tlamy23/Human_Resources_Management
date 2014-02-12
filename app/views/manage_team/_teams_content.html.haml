@@ -7,20 +7,12 @@
     %p.teams
       %a.thubnail.btn.btn-info.teams{id: "#{t.id}"}= t.name
       %a.lnk-team-edit.btn.btn-xs{id: t.id,data:{toggle: "modal",target: "#team_edit"}} Edit
-      %a.lnk-team-remove.btn.btn-xs{:href=> "destroy/#{t.id}",data:{:confirm => 'Are you sure?'},id: t.id } Remove
+      %a.lnk-team-remove.btn.btn-xs{:href=> "destroy_team/#{t.id}",data:{:confirm => 'Are you sure?'},id: t.id } Remove
 .col-md-8.panel
   .page-header
     Team Name:
     %b.btn.btn-info#team_head
   .team_employees
 
-.modal.fade#team_edit{tabindex: "-1", role: "dialog", aria: {labelledby: "team_edit", hidden: "true"}}
-  .modal-dialog
-    .modal-content
-      .modal-body
-        .team_edit
-.modal.fade#team_new{tabindex: "-1", role: "dialog", aria: {labelledby: "team_new", hidden: "true"}}
-  .modal-dialog
-    .modal-content
-      .modal-body
-        .team_new
+= render 'modals_manageteam',name: 'team_edit'
+= render 'modals_manageteam',name: 'team_new'

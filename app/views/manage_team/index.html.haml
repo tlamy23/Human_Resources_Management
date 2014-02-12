@@ -3,8 +3,8 @@
   = stylesheet_link_tag "/assets/manage_team.css", "data-turbolinks-track" => true
 
 = @hml.render 
+= @hml_project.render
 
-.project-selected{}
 .col-md-8
   .row#teams
     = render 'teams_content'
