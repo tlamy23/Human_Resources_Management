@@ -1,5 +1,6 @@
 class ManageTeamController < ApplicationController
-  before_action :set_team, only: [:teams_edit,:update_team,:destroy]
+  before_action :set_team, only: [:teams_edit,:update_team,:destroy_team]
+  before_action :set_project, only: [:create_projects, :update_project, :projects_edit, :destroy_project]
 
   def index
   	@teams=Team.all
@@ -39,10 +40,10 @@ class ManageTeamController < ApplicationController
     end
   end
 
-   def teams_new
+  def teams_new
     @team = Team.new
     render :json => { :view => render_to_string( 'team_new', :layout => false ) }
-   end
+  end
 
    def create_team
     @team = Team.new(team_params)
@@ -57,8 +58,50 @@ class ManageTeamController < ApplicationController
     end
    end
 
-   def destroy
+   def destroy_team
     @team.destroy
+    respond_to do |format|
+      format.html { redirect_to '/manage_team', notice: 'Team was removed.' }
+    end
+  end
+
+  def projects_new
+    @project = Project.new
+    render :json => { :view => render_to_string( 'project_new', :layout => false ) }
+   end
+
+   def create_project
+    @project = Project.new(project_params)
+    respond_to do |format|
+      if @project.save                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+        format.html { redirect_to '/manage_team', notice: 'Project was successfully created.' }
+      else
+        @errors= @project.errors
+        flash[:error] = @errors.full_messages.join(', ')
+        format.html { redirect_to '/manage_team' }
+      end
+    end
+   end
+
+   def projects_edit
+    render :json => { :view => render_to_string( 'project_edit', :layout => false ) }
+  end
+
+  def update_project
+    respond_to do |format|
+      if @project.update(project_params)
+        flash[:notice] = "Team was successfully updated"
+        format.html { redirect_to :action=>'index', :params => {:team_s => @team} }
+      else
+        @errors= @project.errors
+        flash[:error] = @errors.full_messages.join(', ')
+        format.html { redirect_to '/manage_team' }
+      end
+    end
+  end
+
+  def destroy_project
+    @project.destroy
     respond_to do |format|
       format.html { redirect_to '/manage_team', notice: 'Team was removed.' }
     end
@@ -70,8 +113,16 @@ class ManageTeamController < ApplicationController
         @team = Team.find(params[:id])
       end
 
+      def set_project
+        @project = Project.find(params[:id])
+      end
+
       # Never trust parameters from the scary internet, only allow the white list through.
       def team_params
         params.require(:team).permit(:name, :leader_id)
+      end
+
+      def project_params
+        params.require(:project).permit(:name,:team_id,:admin_id,:calendar_type_id)
       end
 end

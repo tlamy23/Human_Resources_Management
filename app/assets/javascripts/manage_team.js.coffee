@@ -5,6 +5,9 @@ ready = ->
   $('.lnk-team-edit.btn.btn-xs').hide()
   $('.lnk-team-remove.btn.btn-xs').hide()
 
+  $('.lnk-project-edit.btn.btn-xs').hide()
+  $('.lnk-project-remove.btn.btn-xs').hide()
+
   $.ajax
     type:'GET'
     url: "/teams_new"
@@ -17,6 +20,12 @@ ready = ->
     success: (data) ->
       $(".employee_new").html( data.view )
 
+  $.ajax
+    type:'GET'
+    url: "/projects_new"
+    success: (data) ->
+      $(".project_new").html( data.view )
+
   if ($('.team-selected').length && $('.team-selected').attr('id') !='')
     select_team($('.team-selected').attr('id'),$('.team-selected').attr('name'))
 
@@ -26,13 +35,7 @@ ready = ->
     $('.team-selected').attr('name',this.text)
 
   $('.thubnail.btn.btn-primary.projects').click ->
-    id = this.id
-    $('#project_head').text(this.text)
-    $.ajax
-      type:'GET'
-      url: "/projects/#{id}/projects_content"
-      success: (data) ->
-        $("#project_content").html( data.view )
+    select_project(this.id,this.text)
 
   $(document).on "click",".team_employees .btn.btn-success.collabolator", ->
     id = this.id
@@ -72,5 +75,23 @@ select_team = (id,text) ->
     url: "/teams_edit/#{id}"
     success: (data) ->
       $(".team_edit").html( data.view )
+
+select_project = (id,text) ->
+  $('.lnk-project-edit.btn.btn-xs').hide()
+  $('.lnk-project-remove.btn.btn-xs').hide()
+  $("##{id}.lnk-project-edit.btn.btn-xs").show()
+  $("##{id}.lnk-project-remove.btn.btn-xs").show()
+  $('#project_head').text(text)
+  $.ajax
+    type:'GET'
+    url: "/projects/#{id}/projects_content"
+    success: (data) ->
+      $("#project_content").html( data.view )
+  $.ajax
+    type:'GET'
+    url: "/projects_edit/#{id}"
+    success: (data) ->
+      $(".project_edit").html( data.view )
+
 $(document).ready(ready)
 $(document).on('page:load', ready)

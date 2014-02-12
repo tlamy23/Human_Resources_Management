@@ -2,14 +2,25 @@
   .page-header
     %a{href: url_for(projects_path)}Projects
     %small= "[#{@projects.count}]"
-    %a.btn.btn-xs{href: url_for(new_project_path)} New Project
+    %a.lnk-project-new.btn.btn-xs{data:{toggle: "modal",target: "#project_new"}} New project
   - @projects.each do |p|
     %p.projects
       %a.thubnail.btn.btn-primary.projects{id: "#{p.id}"}= p.name
-      %a.btn.btn-xs{href: url_for(edit_project_path(p))} Edit
-      %a.btn.btn-xs Remove
+      %a.lnk-project-edit.btn.btn-xs{id: p.id,data:{toggle: "modal",target: "#project_edit"}} Edit
+      %a.lnk-project-remove.btn.btn-xs{:href=> "destroy_project/#{p.id}",data:{:confirm => 'Are you sure?'},id: p.id } Remove
 .col-md-8.panel
   .page-header
     Project Name:
     %b.btn.btn-primary#project_head
   #project_content
+
+.modal.fade#project_new{tabindex: "-1", role: "dialog", aria: {labelledby: "project_new", hidden: "true"}}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .project_new
+.modal.fade#project_edit{tabindex: "-1", role: "dialog", aria: {labelledby: "project_edit", hidden: "true"}}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .project_edit
