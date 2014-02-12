@@ -1,7 +1,10 @@
 = content_for :scripts do
-  = javascript_include_tag "/assets/teams.js"
-  = stylesheet_link_tag "/assets/teams.css", "data-turbolinks-track" => true
+  = javascript_include_tag "/assets/manage_team.js"
+  = stylesheet_link_tag "/assets/manage_team.css", "data-turbolinks-track" => true
 
+= @hml.render 
+
+.project-selected{}
 .col-md-8
   .row#teams
     = render 'teams_content'
@@ -10,13 +13,7 @@
 
     
 .col-md-4
-  .page-header
-    Employees Unassigned
-    %a.btn.btn-xs{href: url_for(new_employee_path)} New Employee
-  .employees-unassigned
-    - @employees.each do |e|
-      .btn.btn-warning{id: e.id}
-        = "#{e.name} #{e.first_lastname}"
+  = render 'employees_unassigned', employees: @employees 
   .page-header
     Teams Unassigned
   .teams-unassigned

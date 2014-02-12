@@ -65,11 +65,9 @@ module ApplicationHelper
 		days=calendar_days
 	    n=0
 		days.each do|d|
-	      if @dayn.strftime("%a") == d["label"]
-	        n=d["id"]
-	      end
+	      n=d["id"] if @dayn.strftime("%a") == d["label"]
 	    end
-	    return n
+	    n
 	end
 
 	def calendar_grater_days(start_day)

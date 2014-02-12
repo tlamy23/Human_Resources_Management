@@ -1,0 +1,32 @@
+%h1 New employee
+= form_for(@employee, url: url_for(action: 'create_employee', controller: 'employees'))  do |f|
+  .form-group
+    = f.label "Photo", :class => "control-label"
+    %br/
+    = image_tag(@employee.image, :size => "200x200", :class => "img-thumbnail")
+  .form-group
+    = f.label :name, :class => "control-label"
+    .control
+      = f.text_field :name,:class =>"form-control"
+  .form-group
+    = f.label :first_lastname, :class => "control-label"
+    .control
+      = f.text_field :first_lastname,:class =>"form-control"
+  .form-group
+    = f.label :second_lastname, :class => "control-label"
+    .control
+      = f.text_field :second_lastname,:class =>"form-control"
+  .form-group
+    = f.label :team_id, :class => "control-label"
+    .control
+      = f.select :team_id,Team.all.collect{|t|[t.name,t.id]}, {:include_blank => true},{:class => "form-control"}
+  .form-group
+    = f.label :birthdate, :class => "control-label"
+    .control
+      = f.date_select :birthdate,:class => "form-control"
+  .form-group
+    = f.label "Image", :class => "control-label"
+    .control
+      = f.file_field :dataimage,:class =>"form-control"
+  .form-group
+    = f.submit :class =>"btn btn-Primary"

@@ -92,10 +92,29 @@ class EmployeesController < ApplicationController
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
       else
         @errors=@employee.errors
-        format.html { render action: '/manage_team' }
+        format.html { redirect_to '/manage_team' }
       end
     end
   end
+
+  def employees_new
+    @employee = Employee.new
+    render :json => { :view => render_to_string( 'employee_new', :layout => false ) }
+   end
+
+   def create_employee
+    @employee = Employee.new(employee_params)
+    upload
+    respond_to do |format|
+      if @employee.save
+        format.html { redirect_to '/manage_team', notice: 'Employee was successfully created.' }
+      else
+        @errors= @employee.errors
+        flash[:error] = @errors.full_messages.join(', ')
+        format.html { redirect_to '/manage_team' }
+      end
+    end
+   end
 
   private
     # Use callbacks to share common setup or constraints between actions.

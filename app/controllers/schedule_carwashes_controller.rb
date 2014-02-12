@@ -69,7 +69,7 @@ class ScheduleCarwashesController < ApplicationController
   end
 
   def byday_schedule_carwash
-    @schedule_carwashes=ScheduleCarwash.where(date: params[:day]).order(:turn)
+    @schedule_carwashes=ScheduleCarwash.by_date(params[:day])
     @day=params[:day].to_date
   end
   private
