@@ -15,6 +15,13 @@ class ManageTeamController < ApplicationController
     else
       @hml=Haml::Engine.new(".team-selected{name: '',id: ''}")
     end
+
+    @project_s = Project.find_by_id(params[:project_s]) if params[:project_s].present?
+    if @project_s.present?
+      @hml_project=Haml::Engine.new(".project-selected{name: '#{@project_s.name}',id: '#{@project_s.id}'}")
+    else
+      @hml_project=Haml::Engine.new(".project-selected{name: '',id: ''}")
+    end
   end
 
   def teams_content
@@ -91,7 +98,7 @@ class ManageTeamController < ApplicationController
     respond_to do |format|
       if @project.update(project_params)
         flash[:notice] = "Team was successfully updated"
-        format.html { redirect_to :action=>'index', :params => {:team_s => @team} }
+        format.html { redirect_to :action=>'index', :params => {:project_s => @project} }
       else
         @errors= @project.errors
         flash[:error] = @errors.full_messages.join(', ')

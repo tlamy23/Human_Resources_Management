@@ -29,6 +29,9 @@ ready = ->
   if ($('.team-selected').length && $('.team-selected').attr('id') !='')
     select_team($('.team-selected').attr('id'),$('.team-selected').attr('name'))
 
+  if ($('.project-selected').length && $('.project-selected').attr('id') !='')
+    select_project($('.project-selected').attr('id'),$('.project-selected').attr('name'))
+
   $('.thubnail.btn.btn-info.teams').click ->
     select_team(this.id,this.text)
     $('.team-selected').attr('id',this.id)
