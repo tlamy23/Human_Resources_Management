@@ -1,0 +1,15 @@
+= form_for @project do |f|
+  .form-group
+    = f.label :name, class: "control-label"
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :admin_id, class: "control-label"
+    = f.select :admin_id,Employee.all.collect{|e|["#{e.name} #{e.first_lastname}",e.id]}, {:include_blank => true},{:class => "form-control"}
+  .form-group
+    = f.label :team, class: "control-label"
+    = f.select :team_id, Team.all.collect{|t|[t.name,t.id]}, {:include_blank => true}, {:class => "form-control"}
+  .form-group
+    = f.label :calendar_type, class: "control-label"
+    = f.select :calendar_type_id, CalendarType.all.collect{|c|[c.name,c.id]}, {:include_blank => true}, {:class => "form-control"}
+  .form-group
+    = f.submit 'Save', class: "btn btn-primary"

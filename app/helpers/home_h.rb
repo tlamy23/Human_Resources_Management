@@ -9,9 +9,9 @@ class HomeH
 		if @name == "CarWash"
 			ScheduleCarwash.where(date: @day).order(:turn)
 		elsif @name == "BirthDate"
-			Employee.find(:all, :conditions => ["STRFTIME('%m-%d', birthdate) = '?-?'", @day.month, @day.day])
+			Employee.find(:all, :conditions => ["STRFTIME('%m-%d', birthdate) = ?", @day.strftime("%m-%d")])
 		elsif @name == "DayOff"
-			DayOff.find(:all, :conditions => ["STRFTIME('%m-%d', date) = '?-?'", @day.month, @day.day])
+			DayOff.find(:all, :conditions =>  ["STRFTIME('%m-%d', date) = ?", @day.strftime("%m-%d")])
 		end
 	end
 

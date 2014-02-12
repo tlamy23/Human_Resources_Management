@@ -68,8 +68,8 @@ class DayOffsController < ApplicationController
   end
 
   def byday_day_off
-    @day_offs=DayOff.where(date: params[:day])
-    @day=params[:day]
+    @day=params[:day].to_date
+    @day_offs=DayOff.find(:all, :conditions =>  ["STRFTIME('%m-%d', date) = ?", @day.strftime("%m-%d")])
   end
 
   private

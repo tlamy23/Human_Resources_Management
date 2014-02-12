@@ -76,8 +76,25 @@ class EmployeesController < ApplicationController
   end
 
   def byday_birthdate
-    @employees=Employee.where(birthdate: params[:day])
-    @day=params[:day]
+    @day=params[:day].to_date
+    @employees=Employee.find(:all, :conditions => ["STRFTIME('%m-%d', birthdate) = ?", @day.strftime("%m-%d")])
+  end
+
+  def add_remove_team
+    @employee = Employee.find_by_id(params["id"])
+    if params["team_id"]!= "null"
+      team_id=params["team_id"]
+    else
+      team_id=nil
+    end
+    respond_to do |format|
+      if @employee.update(team_id: team_id)
+        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
+      else
+        @errors=@employee.errors
+        format.html { render action: '/manage_team' }
+      end
+    end
   end
 
   private
@@ -88,7 +105,7 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:name, :first_lastname, :second_lastname, :calendar_type_id,:birthdate,:image)
+      params.require(:employee).permit(:name, :first_lastname, :second_lastname,:birthdate,:image,:team_id)
     end
     def image_params
       params.require(:employee).permit( :dataimage)

@@ -17,9 +17,9 @@
     .control
       = f.text_field :second_lastname,:class =>"form-control"
   .form-group
-    = f.label :calendar_type_id, :class => "control-label"
+    = f.label :team_id, :class => "control-label"
     .control
-      = f.select :calendar_type_id,CalendarType.all.collect{|t|[t.name,t.id]}, {:include_blank => true},{:class => "form-control"}
+      = f.select :team_id,Team.all.collect{|t|[t.name,t.id]}, {:include_blank => true},{:class => "form-control"}
   .form-group
     = f.label :birthdate, :class => "control-label"
     .control

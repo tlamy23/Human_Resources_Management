@@ -1,0 +1,29 @@
+.page-header
+  %h1 Listing teams
+  %small
+    = link_to 'New Team', new_team_path,class: "btn btn-primary"
+- @teams.each do |team|
+  .col-xs-8.col-md-4
+    .thumbnail.btn-default
+      .media
+        .pull-left
+          %a{href: team_path(team)}
+            %span.glyphicon.glyphicon-asterisk
+            = team.name
+        .media-body
+          %ul.list-group
+            %li.list-group-item
+              = image_tag(team.leader.image, :size => "35x35")
+              %a{href: employee_path(team.leader)}
+                = "#{team.leader.name} #{team.leader.first_lastname}"
+              - @employees=get_teamemployees(team)
+              - if @employees.present?
+                %ul
+                  - @employees.each do |e|
+                    %li.list-group-item
+                      = image_tag(e.image, :size => "35x35")
+                      %a{href: employee_path(e)}
+                        = "#{e.name} #{e.first_lastname}"
+              %li.list-group-item
+                = link_to 'Edit', edit_team_path(team)
+                = link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }

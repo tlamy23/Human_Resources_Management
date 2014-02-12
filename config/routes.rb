@@ -1,4 +1,12 @@
 HumanResourcesManagement::Application.routes.draw do
+  resources :projects do
+    get "projects_content", on: :member
+  end
+
+  resources :teams do
+      get "teams_content", on: :member
+  end
+
   get "home/index"
 
   get 'generateSchedule', to: 'schedule_carwashes#generateSchedule'
@@ -9,6 +17,10 @@ HumanResourcesManagement::Application.routes.draw do
   get 'byday_schedule_carwash', to: 'schedule_carwashes#byday_schedule_carwash'
   get 'byday_day_off', to: 'day_offs#byday_day_off'
   get 'dashboard_day', to: 'home#dashboard_day'
+  get 'manage_team', to: 'teams#manage_team'
+  get 'add_remove_team', to: 'employees#add_remove_team'
+  get 'teams_edit/:id', to: 'teams#teams_edit'
+  get 'update_team', to: 'teams#update_team'
 
   resources :calendar_types
 

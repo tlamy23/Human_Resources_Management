@@ -63,26 +63,26 @@ module ApplicationHelper
 
 	def calendar_unless_days(start_day)
 		days=calendar_days
-    n=0
+	    n=0
 		days.each do|d|
-      if @dayn.strftime("%a") == d["label"]
-        n=d["id"]
-      end
-    end
-    return n
+	      if @dayn.strftime("%a") == d["label"]
+	        n=d["id"]
+	      end
+	    end
+	    return n
 	end
 
 	def calendar_grater_days(start_day)
-    days=calendar_days
-    month=start_day.month
-    n=0
-    while month == start_day.month
-      days.each do|d|
-        start_day += 1
-        n += 1
-      end
-    end
-    return n
+	    days=calendar_days
+	    month=start_day.month
+	    n=0
+	    while month == start_day.month
+	      days.each do|d|
+	        start_day += 1
+	        n += 1
+	      end
+	    end
+	    return n
 	end
 
   def calendar_dayclass(month,month_compare,object)
@@ -99,5 +99,9 @@ module ApplicationHelper
         return object["clas2"]="col-md-2 col-xs-2 btn-info thumbnail alert-success"
       end
     end
+  end
+
+  def get_teamemployees(team)
+  	TeamH.new(team).get_teamemployees
   end
 end

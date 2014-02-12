@@ -1,0 +1,23 @@
+.col-md-4.col-md-offset-4
+	%p#notice= notice
+
+	%p
+		%b Name:
+		= @team.name
+	%p 
+		%b Leader:
+		%a{href: employee_path(@team.leader)}
+			= "#{@team.leader.name} #{@team.leader.first_lastname}"
+	%P
+		%b Members:
+		- @employees=get_teamemployees(@team)
+		- if @employees.present?
+			%ul
+				- @employees.each do |e|
+					%li.list-group-item
+						= image_tag(e.image, :size => "35x35")
+						%a{href: employee_path(e)}
+							= "#{e.name} #{e.first_lastname}"
+	= link_to 'Edit', edit_team_path(@team)
+	\|
+	= link_to 'Back', teams_path

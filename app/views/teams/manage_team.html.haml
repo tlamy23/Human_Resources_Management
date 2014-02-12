@@ -1,0 +1,35 @@
+= content_for :scripts do
+  = javascript_include_tag "/assets/teams.js"
+  = stylesheet_link_tag "/assets/teams.css", "data-turbolinks-track" => true
+
+.col-md-8
+  .row#teams
+    = render 'teams_content'
+  .row#projects
+    = render 'projects_content'
+
+    
+.col-md-4
+  .page-header
+    Employees Unassigned
+    %a.btn.btn-xs{href: url_for(new_employee_path)} New Employee
+  .employees-unassigned
+    - @employees.each do |e|
+      .btn.btn-warning{id: e.id}
+        = "#{e.name} #{e.first_lastname}"
+  .page-header
+    Teams Unassigned
+  .teams-unassigned
+    - @teams_unassigned.each do |t|
+      .btn.btn-danger
+        = t.name
+  .page-header
+    Admins
+  - @admins.each do |a|
+    .btn.btn-success
+      = "#{a.name} #{a.first_lastname}"   
+  .page-header
+    Leaders
+  - @leaders.each do |l|
+    .btn.btn-success
+      = "#{l.name} #{l.first_lastname}"  
