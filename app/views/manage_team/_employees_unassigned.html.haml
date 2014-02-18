@@ -3,7 +3,7 @@
   %a.lnk-employee-new.btn.btn-xs{data:{toggle: "modal",target: "#employee_new"}} New employee
 .employees-unassigned
   - employees.each do |e|
-    .btn.btn-warning{id: e.id}
+    .employee.btn.btn-warning{id: e.id}
       = "#{e.name} #{e.first_lastname}"
 .modal.fade#employee_new{tabindex: "-1", role: "dialog", aria: {labelledby: "employee_new", hidden: "true"}}
   .modal-dialog

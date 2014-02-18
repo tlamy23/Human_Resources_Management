@@ -1,7 +1,7 @@
 .row
   %p
     %b Admin:
-    .btn.btn-success
+    .employee.btn.btn-success{id: @project.admin.id}
       = "#{@project.admin.name} #{@project.admin.first_lastname}"
 - if @project.team.present?
   .row
@@ -12,11 +12,11 @@
   .row
     %p
       %b Leader:
-      .btn.btn-success
+      .employee.btn.btn-success{id: @project.team.leader.id}
         = "#{@project.team.leader.name} #{@project.team.leader.first_lastname}"
   .row
     %p  
       %b Collaborators:
       - @employees.each do |e|
-        .btn.btn-success
+        .employee.btn.btn-success{id: e.id}
           = "#{e.name} #{e.first_lastname}"

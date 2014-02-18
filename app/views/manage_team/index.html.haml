@@ -23,10 +23,13 @@
   .page-header
     Admins
   - @admins.each do |a|
-    .btn.btn-success
-      = "#{a.name} #{a.first_lastname}"   
+    .employee.btn.btn-success{id: a.id}
+      = "#{a.name} #{a.first_lastname}"
+
   .page-header
     Leaders
   - @leaders.each do |l|
-    .btn.btn-success
-      = "#{l.name} #{l.first_lastname}"  
+    .employee.btn.btn-success{id: l.id}
+      = "#{l.name} #{l.first_lastname}"
+
+.popover

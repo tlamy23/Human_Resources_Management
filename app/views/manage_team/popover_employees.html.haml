@@ -1,0 +1,6 @@
+= content_tag :div, id: "employee-content-#{@employee.id}", style: "display:none" do
+  .media
+    .pull-left
+      = image_tag(@employee.image, :size => "35x35")
+    .media-body
+      = @employee.birthdate

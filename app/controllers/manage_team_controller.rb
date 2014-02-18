@@ -89,7 +89,7 @@ class ManageTeamController < ApplicationController
       end
     end
    end
-
+   
    def projects_edit
     render :json => { :view => render_to_string( 'project_edit', :layout => false ) }
   end
@@ -112,6 +112,11 @@ class ManageTeamController < ApplicationController
     respond_to do |format|
       format.html { redirect_to '/manage_team', notice: 'Team was removed.' }
     end
+  end
+
+  def popover_employees
+    @employee = Employee.find_by_id(params["id"])
+    render :json => { :view => render_to_string( 'popover_employees', :layout => false ) }
   end
 
   private

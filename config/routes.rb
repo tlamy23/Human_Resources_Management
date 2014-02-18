@@ -60,6 +60,8 @@ HumanResourcesManagement::Application.routes.draw do
 
   get 'destroy_project/:id', to: 'manage_team#destroy_project'
 
+  get 'popover_employees/:id', to: 'manage_team#popover_employees'
+
   
 
   root 'home#index'

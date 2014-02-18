@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
+
   $('.lnk-team-edit.btn.btn-xs').hide()
   $('.lnk-team-remove.btn.btn-xs').hide()
 
@@ -32,6 +33,8 @@ ready = ->
   if ($('.project-selected').length && $('.project-selected').attr('id') !='')
     select_project($('.project-selected').attr('id'),$('.project-selected').attr('name'))
 
+  popover_employees()
+
   $('.thubnail.btn.btn-info.teams').click ->
     select_team(this.id,this.text)
     $('.team-selected').attr('id',this.id)
@@ -39,6 +42,8 @@ ready = ->
 
   $('.thubnail.btn.btn-primary.projects').click ->
     select_project(this.id,this.text)
+    $('.project-selected').attr('id',this.id)
+    $('.project-selected').attr('name',this.text)
 
   $(document).on "click",".team_employees .btn.btn-success.collabolator", ->
     id = this.id
@@ -78,6 +83,7 @@ select_team = (id,text) ->
     url: "/teams_edit/#{id}"
     success: (data) ->
       $(".team_edit").html( data.view )
+      popover_employees()
 
 select_project = (id,text) ->
   $('.lnk-project-edit.btn.btn-xs').hide()
@@ -95,6 +101,25 @@ select_project = (id,text) ->
     url: "/projects_edit/#{id}"
     success: (data) ->
       $(".project_edit").html( data.view )
+      popover_employees()
+
+popover_employees = ->
+  $('.employee').each ->
+    $.ajax
+      type:'GET'
+      url: "/popover_employees/#{$(this).attr('id')}"
+      success: (data) ->
+        $(".popover").append( data.view )
+  popover_add()
+
+popover_add = ->
+  $('.employee').each ->
+    $(this).popover
+      trigger: 'hover',
+      html: true,
+      content: ->
+        $("#employee-content-#{$(this).attr('id')}").html() 
+      container: 'body'
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
